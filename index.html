@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中醫國考複習站</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+:root{
+  --bg:#0f0e0c;--surface:#1a1814;--surface2:#221f1a;
+  --border:#2e2a24;--border2:#3d3830;
+  --text:#e8dfc8;--muted:#7a7060;--muted2:#9a8e78;
+  --gold:#c9a84c;--gold2:#e8c870;
+  --green:#4a8a5a;--green2:#6ab87a;
+  --blue:#4a7fa8;--blue2:#6aafd8;
+  --purple:#7a5ca8;--purple2:#b09ae8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+header{
+  background:linear-gradient(135deg,#1c1710,#0f0e0c);
+  border-bottom:1px solid var(--border);
+  padding:2.5rem 2.5rem 2rem;
+  position:relative;overflow:hidden;
+}
+header::before{
+  content:'醫';font-family:'Noto Serif TC',serif;
+  font-size:16rem;font-weight:900;
+  color:rgba(201,168,76,0.035);
+  position:absolute;right:-2rem;top:-3rem;line-height:1;pointer-events:none;
+}
+.h-eyebrow{font-size:0.68rem;color:var(--muted);letter-spacing:0.18em;margin-bottom:0.5rem;text-transform:uppercase;}
+header h1{font-family:'Noto Serif TC',serif;font-size:1.75rem;font-weight:700;color:var(--gold2);letter-spacing:0.06em;margin-bottom:0.5rem;}
+header p{font-size:0.78rem;color:var(--muted2);line-height:1.7;max-width:500px;}
+.main{padding:2.5rem 2.5rem 4rem;max-width:960px;margin:0 auto;width:100%;flex:1;}
+.section-label{font-size:0.65rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.45rem;border-bottom:1px solid var(--border2);}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2.5rem;}
+.tool-card{
+  display:block;text-decoration:none;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s;
+}
+.tool-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.5);border-color:var(--border2);}
+.tc-accent{height:3px;}
+.tc-accent.gold{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.tc-accent.green{background:linear-gradient(90deg,var(--green),var(--green2));}
+.tc-head{padding:1.1rem 1.2rem 0.7rem;}
+.tc-icon{font-size:1.6rem;margin-bottom:0.55rem;}
+.tc-title{font-family:'Noto Serif TC',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.2rem;}
+.tc-sub{font-size:0.68rem;color:var(--muted);letter-spacing:0.05em;}
+.tc-body{padding:0 1.2rem 0.9rem;font-size:0.74rem;color:var(--muted2);line-height:1.75;}
+.tc-footer{
+  padding:0.6rem 1.2rem;border-top:1px solid var(--border);
+  display:flex;gap:0.5rem;flex-wrap:wrap;
+}
+.ftag{font-size:0.62rem;padding:0.12rem 0.45rem;border-radius:3px;}
+.ftag.gold{background:rgba(201,168,76,0.1);color:var(--gold2);}
+.ftag.green{background:rgba(74,138,90,0.1);color:var(--green2);}
+.ftag.blue{background:rgba(74,127,168,0.1);color:var(--blue2);}
+.ftag.purple{background:rgba(122,92,168,0.1);color:var(--purple2);}
+.exam-row{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+.ebadge{
+  padding:0.35rem 0.85rem;border-radius:4px;font-size:0.7rem;
+  letter-spacing:0.04em;font-weight:500;display:flex;align-items:center;gap:0.4rem;
+}
+.ebadge.e1{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold2);}
+.ebadge.e2{background:rgba(74,138,90,0.1);border:1px solid rgba(74,138,90,0.3);color:var(--green2);}
+.ebadge.e3{background:rgba(122,92,168,0.1);border:1px solid rgba(122,92,168,0.3);color:var(--purple2);}
+.ebadge small{font-size:0.62rem;opacity:0.7;}
+footer{border-top:1px solid var(--border);padding:1rem 2.5rem;font-size:0.65rem;color:var(--muted);text-align:center;letter-spacing:0.05em;}
+@media(max-width:600px){
+  header{padding:1.5rem;}
+  header h1{font-size:1.35rem;}
+  .main{padding:1.5rem 1.2rem 3rem;}
+  .tools-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-eyebrow">中醫師國家考試　複習系統</div>
+  <h1>中醫國考複習站</h1>
+  <p>整合方劑學習工具，涵蓋內科120方之口訣、藥材組成、功效證型，搭配閃卡練習與掌握度統計。</p>
+  <div class="exam-row">
+    <div class="ebadge e1">🟡 第一考 <small>2026/10/16 · 1–40方</small></div>
+    <div class="ebadge e2">🟢 第二考 <small>2027/02/26 · 41–80方</small></div>
+    <div class="ebadge e3">🟣 第三考 <small>2027/04/16 · 81–120方</small></div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="section-label">學習工具</div>
+  <div class="tools-grid">
+
+    <a class="tool-card" href="120fang.html">
+      <div class="tc-accent gold"></div>
+      <div class="tc-head">
+        <div class="tc-icon">📅</div>
+        <div class="tc-title">內科 120 方　整合複習計劃</div>
+        <div class="tc-sub">三考全程備戰　2026.06 — 2027.04</div>
+      </div>
+      <div class="tc-body">
+        含完整複習時間軸、分批計劃總覽、閃卡練習（方名↔口訣↔藥材）、掌握度統計。
+        支援「不熟 / 複習中 / 已掌握」三階段標記，弱點模式優先出題。
+      </div>
+      <div class="tc-footer">
+        <span class="ftag gold">整合計劃</span>
+        <span class="ftag gold">方劑卡片</span>
+        <span class="ftag blue">閃卡練習</span>
+        <span class="ftag green">掌握統計</span>
+      </div>
+    </a>
+
+    <a class="tool-card" href="compare.html">
+      <div class="tc-accent green"></div>
+      <div class="tc-head">
+        <div class="tc-icon">📖</div>
+        <div class="tc-title">國考方劑整合對照表</div>
+        <div class="tc-sub">功效 · 證型 · 藥材 · 口訣　全整合</div>
+      </div>
+      <div class="tc-body">
+        每方同時呈現功效、主治證型、藥材組成、記憶口訣，可依分類篩選，支援全文搜尋。
+        閃卡模式含「方名→功效證型」「口訣→藥材」「證型→方名」三種出題方向。
+      </div>
+      <div class="tc-footer">
+        <span class="ftag green">對照卡片</span>
+        <span class="ftag blue">閃卡練習</span>
+        <span class="ftag green">掌握統計</span>
+        <span class="ftag purple">分類篩選</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>中醫國考複習站　· 資料僅供個人學習使用</footer>
+</body>
+</html>

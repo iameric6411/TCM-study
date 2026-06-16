@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國考方劑整合對照表（全120方）</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+:root{
+  --bg:#0f0e0c;--surface:#1a1814;--surface2:#221f1a;--surface3:#2a2620;
+  --border:#2e2a24;--border2:#3d3830;
+  --text:#e8dfc8;--muted:#7a7060;--muted2:#9a8e78;
+  --gold:#c9a84c;--gold2:#e8c870;--golddim:rgba(201,168,76,0.12);
+  --red:#c45c3a;--red2:#e07050;
+  --blue:#4a7fa8;--blue2:#6aafd8;
+  --green:#4a8a5a;--green2:#6ab87a;
+  --purple:#7a5ca8;--purple2:#b09ae8;
+  --teal:#3a8a88;--teal2:#6ac8c6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1c1710 0%,#0f0e0c 60%);
+  border-bottom:1px solid var(--border);
+  padding:1.6rem 2rem 1.2rem;
+  position:relative;overflow:hidden;
+}
+header::before{
+  content:'方';
+  font-family:'Noto Serif TC',serif;font-size:14rem;font-weight:900;
+  color:rgba(201,168,76,0.03);
+  position:absolute;right:-1rem;top:-3rem;line-height:1;pointer-events:none;
+}
+.h-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.h-title{font-family:'Noto Serif TC',serif;font-size:1.45rem;font-weight:700;color:var(--gold2);letter-spacing:0.06em;}
+.h-sub{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;letter-spacing:0.08em;}
+.h-count{display:flex;gap:0.6rem;align-items:center;}
+.hbadge{
+  padding:0.3rem 0.75rem;border-radius:4px;font-size:0.68rem;letter-spacing:0.05em;font-weight:500;
+  background:var(--golddim);border:1px solid rgba(201,168,76,0.3);color:var(--gold2);
+}
+
+/* NAV */
+nav{
+  display:flex;border-bottom:1px solid var(--border);
+  background:var(--surface);padding:0 1.5rem;overflow-x:auto;
+}
+nav button{
+  padding:0.65rem 1.1rem;border:none;background:none;
+  font-family:'Noto Sans TC',sans-serif;font-size:0.76rem;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;
+  white-space:nowrap;transition:all 0.2s;letter-spacing:0.04em;
+}
+nav button:hover{color:var(--text);}
+nav button.active{color:var(--gold2);border-bottom-color:var(--gold);}
+
+/* MAIN */
+.main{padding:1.4rem 1.8rem 3rem;max-width:1300px;margin:0 auto;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
+
+/* FILTER BAR */
+.filter-bar{
+  display:flex;gap:0.45rem;flex-wrap:wrap;
+  margin-bottom:1rem;padding:0.85rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+}
+.filter-bar input{
+  flex:1;min-width:180px;
+  padding:0.4rem 0.75rem;border:1px solid var(--border2);border-radius:5px;
+  font-family:'Noto Sans TC',sans-serif;font-size:0.78rem;
+  background:var(--surface2);color:var(--text);outline:none;
+}
+.filter-bar input:focus{border-color:var(--gold);}
+.fgroup{display:flex;gap:0.35rem;flex-wrap:wrap;align-items:center;}
+.fgl{font-size:0.63rem;color:var(--muted);white-space:nowrap;margin-right:0.15rem;}
+.fbtn{
+  padding:0.32rem 0.65rem;border:1px solid var(--border2);border-radius:4px;
+  background:var(--surface2);font-family:'Noto Sans TC',sans-serif;
+  font-size:0.67rem;cursor:pointer;color:var(--muted);transition:all 0.15s;white-space:nowrap;
+}
+.fbtn:hover{color:var(--text);border-color:var(--border2);}
+.fbtn.on{background:var(--golddim);color:var(--gold2);border-color:rgba(201,168,76,0.4);}
+.fbtn.on-g{background:rgba(74,138,90,0.12);color:var(--green2);border-color:rgba(74,138,90,0.35);}
+.fbtn.on-b{background:rgba(74,127,168,0.12);color:var(--blue2);border-color:rgba(74,127,168,0.35);}
+.fbtn.on-r{background:rgba(196,92,58,0.12);color:var(--red2);border-color:rgba(196,92,58,0.35);}
+.fbtn.on-p{background:rgba(122,92,168,0.12);color:var(--purple2);border-color:rgba(122,92,168,0.35);}
+
+/* RESULT COUNT */
+.rcount{font-size:0.68rem;color:var(--muted);margin-bottom:0.7rem;padding-left:0.2rem;}
+.rcount span{color:var(--gold2);font-weight:500;}
+
+/* CARD GRID */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0.75rem;}
+.fcard2{
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  transition:border-color 0.2s,transform 0.15s;
+}
+.fcard2:hover{transform:translateY(-2px);border-color:var(--border2);}
+.fcard2.s-mastered{border-color:rgba(74,138,90,0.45);}
+.fcard2.s-reviewing{border-color:rgba(201,168,76,0.45);}
+.fcard2.s-unfamiliar{border-color:rgba(196,92,58,0.45);}
+
+.card-head{
+  padding:0.55rem 0.9rem;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg,rgba(201,168,76,0.04),transparent);
+}
+.card-name{font-family:'Noto Serif TC',serif;font-size:0.95rem;font-weight:600;color:var(--text);}
+.card-meta{display:flex;gap:0.4rem;align-items:center;}
+.tag-cat{
+  font-size:0.6rem;padding:0.1rem 0.42rem;border-radius:3px;
+  background:rgba(74,127,168,0.12);color:var(--blue2);border:1px solid rgba(74,127,168,0.2);
+}
+.tag-ex{
+  font-size:0.6rem;padding:0.1rem 0.3rem;border-radius:3px;
+  font-weight:500;
+}
+.tag-ex.e1{background:rgba(201,168,76,0.12);color:var(--gold2);}
+.tag-ex.e2{background:rgba(74,138,90,0.12);color:var(--green2);}
+.tag-ex.e3{background:rgba(122,92,168,0.12);color:var(--purple2);}
+
+.card-body{padding:0.6rem 0.9rem;display:flex;flex-direction:column;gap:0.38rem;}
+.row-label{font-size:0.58rem;color:var(--border2);letter-spacing:0.1em;margin-bottom:0.1rem;}
+.row-val{font-size:0.74rem;color:var(--muted2);line-height:1.55;}
+.row-val.effect{color:var(--teal2);}
+.row-val.pattern{color:var(--text);font-weight:400;}
+.row-val.mnem{color:var(--blue2);}
+.row-val.herbs{color:var(--muted);font-size:0.7rem;}
+.herbs-hidden{display:none;}
+
+.card-actions{
+  display:flex;gap:0.35rem;padding:0.42rem 0.9rem;
+  border-top:1px solid var(--border);
+}
+.abtn{
+  flex:1;padding:0.28rem;border:1px solid var(--border);border-radius:4px;
+  font-family:'Noto Sans TC',sans-serif;font-size:0.6rem;cursor:pointer;
+  background:none;color:var(--muted);transition:all 0.15s;
+}
+.abtn:hover{background:var(--surface2);color:var(--text);}
+.abtn.a-u{background:rgba(196,92,58,0.1);border-color:rgba(196,92,58,0.3);color:var(--red2);}
+.abtn.a-r{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.3);color:var(--gold2);}
+.abtn.a-m{background:rgba(74,138,90,0.1);border-color:rgba(74,138,90,0.3);color:var(--green2);}
+
+/* FLASHCARD TAB */
+.fc-opts{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;align-items:center;}
+.fc-opts span{font-size:0.7rem;color:var(--muted);}
+.fcm{
+  padding:0.35rem 0.85rem;border:1px solid var(--border2);border-radius:20px;
+  font-family:'Noto Sans TC',sans-serif;font-size:0.7rem;
+  cursor:pointer;background:var(--surface);color:var(--muted);transition:all 0.15s;
+}
+.fcm:hover{color:var(--text);}
+.fcm.active{background:var(--golddim);color:var(--gold2);border-color:rgba(201,168,76,0.4);}
+
+.fc-range{
+  display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem;
+  padding-top:0.6rem;border-top:1px solid var(--border);align-items:center;
+}
+.fc-range span{font-size:0.7rem;color:var(--muted);}
+
+.fc-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
+.flip-card{
+  width:100%;max-width:520px;min-height:280px;
+  background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;
+  padding:2.4rem 2rem;text-align:center;cursor:pointer;user-select:none;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0.9rem;
+  transition:box-shadow 0.2s,border-color 0.2s;
+}
+.flip-card:hover{box-shadow:0 6px 28px rgba(0,0,0,0.45);border-color:var(--border2);}
+.fc-qlabel{font-size:0.6rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;}
+.fc-question{font-family:'Noto Serif TC',serif;font-size:1.65rem;font-weight:700;color:var(--gold2);line-height:1.3;}
+.fc-answer{font-size:0.84rem;color:var(--blue2);line-height:1.85;max-width:400px;}
+.fc-effect{font-size:0.76rem;color:var(--teal2);line-height:1.7;max-width:400px;border-top:1px solid var(--border);padding-top:0.6rem;}
+.fc-hint{font-size:0.6rem;color:var(--border2);}
+
+.fc-nav{display:flex;justify-content:center;gap:0.7rem;align-items:center;margin-bottom:0.75rem;}
+.fc-nav button{
+  padding:0.42rem 1.2rem;border:1px solid var(--border2);border-radius:5px;
+  background:var(--surface);font-family:'Noto Sans TC',sans-serif;
+  font-size:0.74rem;cursor:pointer;color:var(--text);transition:all 0.15s;
+}
+.fc-nav button:hover{background:var(--surface2);}
+.fc-cnt{font-size:0.74rem;color:var(--muted);min-width:55px;text-align:center;}
+
+.mark-row{display:flex;gap:0.6rem;justify-content:center;}
+.mbtn{
+  padding:0.42rem 1rem;border-radius:5px;
+  font-family:'Noto Sans TC',sans-serif;font-size:0.72rem;cursor:pointer;transition:all 0.15s;
+}
+.m-u{background:rgba(196,92,58,0.1);border:1px solid rgba(196,92,58,0.3);color:var(--red2);}
+.m-r{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold2);}
+.m-m{background:rgba(74,138,90,0.1);border:1px solid rgba(74,138,90,0.3);color:var(--green2);}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.6rem;margin-bottom:1.2rem;}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.8rem;text-align:center;}
+.snum{font-family:'Noto Serif TC',serif;font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:0.2rem;}
+.slbl{font-size:0.63rem;color:var(--muted);letter-spacing:0.05em;}
+.prog-row{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.5rem;}
+.prog-lbl{width:90px;font-size:0.72rem;color:var(--text);}
+.prog-tr{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:3px;transition:width 0.8s ease;}
+.prog-pct{width:38px;text-align:right;font-size:0.67rem;color:var(--muted);}
+
+section{margin-bottom:2rem;}
+section h2{
+  font-family:'Noto Serif TC',serif;font-size:0.88rem;font-weight:600;
+  color:var(--gold);margin-bottom:0.9rem;padding-bottom:0.4rem;
+  border-bottom:1px solid var(--border2);letter-spacing:0.06em;
+}
+.tip{
+  background:rgba(74,127,168,0.07);border-left:2px solid var(--blue);
+  border-radius:0 5px 5px 0;padding:0.6rem 0.9rem;
+  font-size:0.74rem;line-height:1.7;color:var(--muted2);margin-bottom:0.9rem;
+}
+
+@media(max-width:600px){
+  .main{padding:0.9rem;}header{padding:1rem;}
+  .cgrid{grid-template-columns:1fr;}
+  .flip-card{padding:1.6rem 1.2rem;min-height:240px;}
+  .fc-question{font-size:1.35rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-top">
+    <div>
+      <div class="h-title">國考方劑整合對照表</div>
+      <div class="h-sub">功效 · 證型 · 藥材組成 · 記憶口訣　全整合複習</div>
+    </div>
+    <div class="h-count">
+      <div class="hbadge" id="total-badge">共 — 方</div>
+    </div>
+  </div>
+</header>
+<nav>
+  <button class="active" onclick="showTab('cards',this)">📖 對照卡片</button>
+  <button onclick="showTab('flash',this)">⚡ 閃卡練習</button>
+  <button onclick="showTab('stats',this)">📊 掌握統計</button>
+</nav>
+<div class="main">
+
+<!-- CARDS TAB -->
+<div id="tab-cards" class="tab-panel active">
+  <div class="filter-bar">
+    <input type="text" id="search" placeholder="搜尋方名、功效、證型、藥材…" oninput="render()">
+    <div class="fgroup">
+      <span class="fgl">範圍：</span>
+      <button class="fbtn on" id="ex-all" onclick="setEx('all',this)">全部</button>
+      <button class="fbtn" id="ex-e1" onclick="setEx('e1',this)">🟡 1–40</button>
+      <button class="fbtn" id="ex-e2" onclick="setEx('e2',this)">🟢 41–80</button>
+      <button class="fbtn" id="ex-e3" onclick="setEx('e3',this)">🟣 81–120</button>
+    </div>
+    <div class="fgroup">
+      <span class="fgl">狀態：</span>
+      <button class="fbtn on" id="st-all" onclick="setSt('all',this)">全部</button>
+      <button class="fbtn" id="st-u" onclick="setSt('unfamiliar',this)">🔴 不熟</button>
+      <button class="fbtn" id="st-r" onclick="setSt('reviewing',this)">🟡 複習中</button>
+      <button class="fbtn" id="st-m" onclick="setSt('mastered',this)">🟢 已掌握</button>
+    </div>
+    <div class="fgroup">
+      <button class="fbtn" id="herb-toggle" onclick="toggleHerbs()">顯示藥材</button>
+    </div>
+  </div>
+  <div class="rcount" id="rcount"></div>
+  <div class="cgrid" id="cgrid"></div>
+</div>
+
+<!-- FLASHCARD TAB -->
+<div id="tab-flash" class="tab-panel">
+  <div class="fc-opts">
+    <span>出題模式：</span>
+    <button class="fcm active" onclick="setFcMode('name2effect',this)">方名 → 功效＋證型</button>
+    <button class="fcm" onclick="setFcMode('mnem2herb',this)">口訣 → 藥材</button>
+    <button class="fcm" onclick="setFcMode('pattern2name',this)">證型 → 方名</button>
+    <button class="fcm" onclick="setFcMode('weak',this)">🔴 弱點模式</button>
+  </div>
+  <div class="fc-range">
+    <span>範圍：</span>
+    <button class="fbtn on" onclick="setFcEx('all',this)">全部</button>
+    <button class="fbtn" onclick="setFcEx('e1',this)">1–40</button>
+    <button class="fbtn" onclick="setFcEx('e2',this)">41–80</button>
+    <button class="fbtn" onclick="setFcEx('e3',this)">81–120</button>
+  </div>
+  <div class="fc-wrap">
+    <div class="flip-card" id="flipcard" onclick="flip()">
+      <div class="fc-qlabel" id="fc-qlabel">QUESTION</div>
+      <div class="fc-question" id="fc-question">選擇範圍後按下一題</div>
+      <div class="fc-answer" id="fc-answer" style="display:none"></div>
+      <div class="fc-effect" id="fc-effect" style="display:none"></div>
+      <div class="fc-hint" id="fc-hint">點擊翻牌 ▽</div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button onclick="prevFc()">← 上一題</button>
+    <span class="fc-cnt" id="fc-cnt">— / —</span>
+    <button onclick="nextFc()">下一題 →</button>
+  </div>
+  <div class="mark-row">
+    <button class="mbtn m-u" onclick="markFc('unfamiliar')">🔴 不熟</button>
+    <button class="mbtn m-r" onclick="markFc('reviewing')">🟡 複習中</button>
+    <button class="mbtn m-m" onclick="markFc('mastered')">🟢 已掌握</button>
+  </div>
+</div>
+
+<!-- STATS TAB -->
+<div id="tab-stats" class="tab-panel">
+  <section>
+    <h2>📊 整體掌握度</h2>
+    <div class="stats-grid" id="stats-grid"></div>
+  </section>
+  <section>
+    <h2>🎯 各批次進度</h2>
+    <div id="prog-rows"></div>
+  </section>
+  <section>
+    <h2>💡 使用提示</h2>
+    <div class="tip">
+      📖 <strong>對照卡片</strong>：搜尋功效關鍵字（如「清熱」「益氣」）快速定位相關方劑，點狀態按鈕標記複習進度。<br>
+      ⚡ <strong>閃卡練習</strong>：建議先做「方名→功效＋證型」建立框架，再做「口訣→藥材」鞏固組成，考前用「弱點模式」集中攻弱。<br>
+      📌 <strong>閃卡翻牌後</strong>：誠實標記狀態，🟢已掌握不會再出現在弱點模式，🔴不熟優先複習。
+    </div>
+  </section>
+</div>
+
+</div>
+<script>
+// ============================================================
+//  DATA - 交集方劑（兩份都有的方名），含全部五欄
+// ============================================================
+const DATA=[
+  // === 解表類 ===
+  {id:'001',ex:'e3',cat:'辛溫解表',name:'麻黃湯',
+   effect:'發汗解表，宣肺平喘',
+   pattern:'風寒束表，肺氣宣發失宣之證',
+   mnem:'乾媽貴姓',
+   herbs:'麻黃、桂枝、杏仁、炙甘草'},
+  {id:'004',ex:'e1',cat:'辛溫解表',name:'九味羌活湯',
+   effect:'解表祛濕，兼清裏熱',
+   pattern:'外感風寒濕而裏有熱',
+   mnem:'九味地芷蒼辛芩甘活防芎',
+   herbs:'羌活、防風、蒼朮、細辛、川芎、白芷、生地、黃芩、甘草、生薑、蔥白'},
+  {id:'008',ex:'e2',cat:'辛溫解表',name:'桂枝湯',
+   effect:'解肌發表，調和營衛',
+   pattern:'營衛不和之證',
+   mnem:'桂芍草薑棗',
+   herbs:'桂枝、白芍、炙甘草、大棗、生薑'},
+  {id:'010',ex:'e1',cat:'辛溫解表',name:'小青龍湯',
+   effect:'解表化飲，止咳平喘',
+   pattern:'外寒內飲證',
+   mnem:'跪下要薑五乾媽操心',
+   herbs:'麻黃、桂枝、白芍、甘草、乾薑、半夏、五味子、細辛'},
+  {id:'006',ex:'e2',cat:'辛溫解表',name:'荊防敗毒散',
+   effect:'發汗解表，祛風止痛',
+   pattern:'外感風寒濕邪之證',
+   mnem:'合將搶二胡，川公獨雞硬，只可幹夫人＋荊防',
+   herbs:'荊芥穗、防風、羌活、獨活、前胡、柴胡、枳殼、桔梗、赤茯苓、川芎、甘草'},
+  {id:'015',ex:'e2',cat:'辛涼解表',name:'桑菊飲',
+   effect:'疏風清熱，宣肺止咳',
+   pattern:'風溫初起，邪在肺衛之證',
+   mnem:'桑菊薄杏，草根更翹',
+   herbs:'桑葉、菊花、連翹、薄荷、甘草、杏仁、桔梗、蘆根'},
+  {id:'016',ex:'e2',cat:'辛涼解表',name:'柴葛解肌湯',
+   effect:'解肌清熱止痛',
+   pattern:'表寒未解，入裏化熱證',
+   mnem:'柴葛解肌白芷搶，勤搞雞乾',
+   herbs:'柴胡、葛根、黃芩、白芍、白芷、羌活、桔梗、石膏、甘草、生薑、大棗'},
+  {id:'017',ex:'e3',cat:'辛涼解表',name:'麻杏甘石湯',
+   effect:'辛涼宣泄，清肺平喘',
+   pattern:'風熱襲肺，或風寒化熱壅肺證',
+   mnem:'麻杏甘石',
+   herbs:'麻黃、杏仁、炙甘草、石膏'},
+  {id:'107',ex:'e3',cat:'辛涼解表',name:'銀翹散',
+   effect:'辛涼透表，清熱解毒',
+   pattern:'風溫初起之發熱表證',
+   mnem:'竹豉荊牛荷銀，草根梗翹',
+   herbs:'金銀花、連翹、竹葉、荊芥、牛蒡子、淡豆豉、薄荷葉、蘆根、桔梗、甘草'},
+  {id:'055',ex:'e2',cat:'辛涼解表',name:'杏蘇散',
+   effect:'輕宣涼燥，宣肺化痰',
+   pattern:'外感涼燥證',
+   mnem:'蘇杏姐將找陳夏領草支前',
+   herbs:'杏仁、前胡、茯苓、半夏、紫蘇葉、枳殼、桔梗、陳皮、甘草、生薑、大棗'},
+  // === 瀉下類 ===
+  {id:'016b',ex:'e1',cat:'寒下',name:'大承氣湯',
+   effect:'峻下熱結',
+   pattern:'痞滿燥實俱全之陽明腑實證',
+   mnem:'大忙時候',
+   herbs:'大黃、厚朴、枳實、芒硝'},
+  {id:'013',ex:'e1',cat:'寒下',name:'小承氣湯',
+   effect:'瀉熱導滯，消積除滿',
+   pattern:'痞、滿、實而不燥之陽明腑實輕證',
+   mnem:'大猴子',
+   herbs:'生大黃、厚朴、枳實'},
+  {id:'091',ex:'e3',cat:'潤下',name:'麻子仁丸',
+   effect:'潤腸瀉熱，行氣通便',
+   pattern:'腸胃燥熱，陰津不足證',
+   mnem:'百大猴子，掃興馬子瘋',
+   herbs:'麻子仁、白芍、枳實、厚朴、杏仁、大黃'},
+  {id:'014',ex:'e1',cat:'寒下',name:'大柴胡湯',
+   effect:'和解少陽，內瀉熱結',
+   pattern:'少陽、陽明合病證',
+   mnem:'芩黃枳藥半胡薑棗',
+   herbs:'柴胡、半夏、大黃、黃芩、白芍、枳實、薑、棗'},
+  // === 補益類 ===
+  {id:'043',ex:'e2',cat:'補陰',name:'左歸丸',
+   effect:'滋陰補腎，填精益髓',
+   pattern:'真陰不足，精髓虧損證',
+   mnem:'茱地山，鹿狗龜兔牛',
+   herbs:'熟地、山藥、枸杞、山萸肉、牛膝、菟絲子、鹿角膠、龜板'},
+  {id:'048',ex:'e2',cat:'補陽',name:'右歸丸',
+   effect:'溫補腎陽，填精益髓',
+   pattern:'腎陽不足，命門火衰證',
+   mnem:'有鬼！育狗鹿菟中，當地要富貴',
+   herbs:'熟地、山藥、枸杞、杜仲、山茱萸、肉桂、熟附子、菟絲子、鹿角膠、當歸'},
+  {id:'022',ex:'e1',cat:'補陰',name:'六味地黃丸',
+   effect:'滋陰補腎',
+   pattern:'腎陰不足證',
+   mnem:'漁夫單要補熟蟹',
+   herbs:'熟地、山藥、山茱萸、茯苓、澤瀉、丹皮'},
+  {id:'002',ex:'e1',cat:'補陰',name:'一貫煎',
+   effect:'滋陰疏肝',
+   pattern:'肝腎陰虛，氣滯橫逆證',
+   mnem:'一貫歸川，殺狗賣地',
+   herbs:'沙參、麥冬、當歸、生地、枸杞、川楝子'},
+  {id:'045',ex:'e2',cat:'補陰',name:'百合固金湯',
+   effect:'滋腎潤肺，化痰止咳',
+   pattern:'肺腎陰虧虛火上炎證',
+   mnem:'弟弟賣草藥，百元皆歸母',
+   herbs:'生地、熟地、麥冬、貝母、百合、當歸、白芍、甘草、玄參、桔梗'},
+  {id:'027',ex:'e1',cat:'補血',name:'四物湯',
+   effect:'補血調血',
+   pattern:'營血虧虛，血行不暢之證',
+   mnem:'歸公掃地',
+   herbs:'當歸、熟地、白芍、川芎'},
+  {id:'042',ex:'e2',cat:'補氣',name:'生脈散',
+   effect:'益氣養陰，生津斂汗',
+   pattern:'氣陰兩虛證',
+   mnem:'人無脈',
+   herbs:'人參、麥冬、五味子'},
+  {id:'030',ex:'e1',cat:'補氣',name:'四君子湯',
+   effect:'益氣健脾',
+   pattern:'脾胃氣虛證',
+   mnem:'人築你吵＋薑棗',
+   herbs:'人參、白朮、茯苓、甘草、生薑、大棗'},
+  {id:'090',ex:'e3',cat:'補氣',name:'參苓白朮散',
+   effect:'益氣健脾，滲濕止瀉',
+   pattern:'脾虛夾濕之證',
+   mnem:'棗陳參茯白朮草，薏仁桔蓮藥砂扁',
+   herbs:'人參、茯苓、白朮、甘草、山藥、蓮肉、桔梗、薏苡仁、白扁豆、砂仁、大棗'},
+  {id:'098',ex:'e3',cat:'補氣',name:'補中益氣湯',
+   effect:'補中益氣，升陽舉陷',
+   pattern:'脾胃氣虛，清陽下陷之證',
+   mnem:'陳擋住人妻身材幹',
+   herbs:'黃耆、人參、白朮、當歸、陳皮、柴胡、升麻、甘草、生薑、大棗'},
+  {id:'038',ex:'e1',cat:'補氣',name:'玉屏風散',
+   effect:'益氣固表止汗',
+   pattern:'衛氣虛弱，腠理不固之證',
+   mnem:'房主棄屏風',
+   herbs:'黃耆、白朮、防風'},
+  {id:'073',ex:'e2',cat:'補氣',name:'益氣聰明湯',
+   effect:'益氣升陽，聰耳明目',
+   pattern:'中氣不足，清陽不升之證',
+   mnem:'聰明人，參耆升葛，蔓京白柏甘',
+   herbs:'黃耆、人參、葛根、蔓荊子、白芍、黃柏、升麻、甘草'},
+  {id:'060',ex:'e2',cat:'氣血雙補',name:'炙甘草湯',
+   effect:'益氣滋陰，補血復脈',
+   pattern:'氣血兩虛之心動悸、脈結代證',
+   mnem:'復賣！叫人找草地賣芝麻醬',
+   herbs:'炙甘草、人參、生地、麥冬、桂枝、火麻仁、生薑、大棗、阿膠'},
+  {id:'117',ex:'e3',cat:'補心血',name:'歸脾湯',
+   effect:'益氣補血，健脾養心',
+   pattern:'心脾氣血不足和脾不統血之證',
+   mnem:'大龍草原牧豬，奇人伏算將歸',
+   herbs:'黃耆、當歸、人參、白朮、茯苓、酸棗仁、龍眼肉、遠志、炙甘草、木香、生薑、大棗'},
+  {id:'009',ex:'e1',cat:'陰陽並補',name:'七寶美髯丹',
+   effect:'補益肝腎，烏髮壯骨',
+   pattern:'肝腎不足證',
+   mnem:'烏龜枸菟牛苓脂',
+   herbs:'何首烏、白茯苓、牛膝、當歸、枸杞、菟絲子、破故紙'},
+  // === 清熱類 ===
+  {id:'093',ex:'e3',cat:'清熱解毒',name:'黃連解毒湯',
+   effect:'瀉火解毒',
+   pattern:'熱毒壅盛三焦證',
+   mnem:'柏芝練琴',
+   herbs:'黃連、黃芩、黃柏、梔子'},
+  {id:'097',ex:'e3',cat:'清熱解毒',name:'普濟消毒飲',
+   effect:'清熱解毒，疏風散邪',
+   pattern:'風熱疫毒，壅於上焦，攻衝頭面證',
+   mnem:'媽媽和陳唬爛幹，旋即連連清蠶牛',
+   herbs:'黃芩、黃連、連翹、玄參、甘草、桔梗、升麻、柴胡、馬勃、陳皮、薄荷、僵蠶、牛蒡子、板藍根'},
+  {id:'112',ex:'e3',cat:'清熱解毒',name:'龍膽瀉肝湯',
+   effect:'瀉肝膽實火，清下焦濕熱',
+   pattern:'肝膽實火上炎或濕熱下注證',
+   mnem:'龍膽瀉甘通車，歸弟才知勤',
+   herbs:'龍膽草、梔子、黃芩、柴胡、生地、澤瀉、當歸、木通、甘草、車前子'},
+  {id:'037',ex:'e1',cat:'清胃熱',name:'玉女煎',
+   effect:'清胃熱，滋腎陰',
+   pattern:'胃熱腎陰虛證',
+   mnem:'地洞搞母牛',
+   herbs:'生石膏、熟地、麥冬、知母、牛膝'},
+  {id:'076',ex:'e2',cat:'清虛熱',name:'秦艽鱉甲散',
+   effect:'滋陰養血，清熱除蒸',
+   pattern:'邪熱內伏，耗損陰血之骨蒸潮熱',
+   mnem:'烏龜叫鱉母，清湖底',
+   herbs:'秦艽、鱉甲、柴胡、地骨皮、知母、當歸、青蒿、烏梅'},
+  {id:'047',ex:'e2',cat:'清氣熱',name:'竹葉石膏湯',
+   effect:'清熱生津，益氣和胃',
+   pattern:'熱病之後餘熱未清，氣陰耗傷胃氣不和之證',
+   mnem:'石竹人夏草米',
+   herbs:'竹葉、石膏、人參、麥冬、半夏、粳米、甘草'},
+  {id:'088',ex:'e3',cat:'清胃熱',name:'清胃湯',
+   effect:'清胃涼血',
+   pattern:'胃中積熱上衝證',
+   mnem:'丹地歸連升',
+   herbs:'黃連、牡丹皮、生地、當歸、升麻'},
+  {id:'089',ex:'e3',cat:'清燥',name:'清燥救肺湯',
+   effect:'清燥潤肺',
+   pattern:'溫燥傷肺，氣陰兩傷證',
+   mnem:'失業人胡麻仁，賣芭蕉炒杏仁',
+   herbs:'石膏、桑葉、人參、胡麻仁、阿膠、麥冬、杏仁、枇杷葉、甘草'},
+  // === 和解類 ===
+  {id:'011',ex:'e1',cat:'和解少陽',name:'小柴胡湯',
+   effect:'和解少陽',
+   pattern:'邪入少陽證',
+   mnem:'薑棗芩柴草夏人',
+   herbs:'柴胡、半夏、人參、甘草、黃芩、薑、棗'},
+  {id:'041',ex:'e2',cat:'調和腸胃',name:'半夏瀉心湯',
+   effect:'和胃降逆，散結除痞',
+   pattern:'寒熱互結證',
+   mnem:'江大人今夏草簾',
+   herbs:'半夏、黃連、黃芩、乾薑、人參、甘草、大棗'},
+  {id:'028',ex:'e1',cat:'調和肝脾',name:'四逆散',
+   effect:'透邪解鬱，疏肝理脾',
+   pattern:'陽熱內鬱，不能外達，肝鬱脾滯證',
+   mnem:'只燒柴草',
+   herbs:'柴胡、白芍、枳實、炙甘草'},
+  {id:'079',ex:'e2',cat:'疏肝理氣',name:'柴胡疏肝湯',
+   effect:'疏肝解鬱，行氣止痛',
+   pattern:'肝氣鬱滯證',
+   mnem:'枳殼陳附川芍柴草',
+   herbs:'柴胡、陳皮、川芎、香附、枳殼、白芍、甘草'},
+  // === 溫裏類 ===
+  {id:'029',ex:'e1',cat:'回陽救逆',name:'四逆湯',
+   effect:'回陽救逆',
+   pattern:'少陰陽衰，陰寒內盛證',
+   mnem:'生父薑幹',
+   herbs:'生附子、乾薑、甘草'},
+  {id:'085',ex:'e3',cat:'溫中祛寒',name:'理中湯',
+   effect:'溫中祛寒，補氣健脾',
+   pattern:'中焦虛寒證',
+   mnem:'人幹白幹',
+   herbs:'人參、白朮、炙甘草、乾薑'},
+  {id:'054',ex:'e2',cat:'溫中祛寒',name:'吳茱萸湯',
+   effect:'溫中補虛，降逆止嘔',
+   pattern:'胃中虛寒，濁陰上逆之證',
+   mnem:'吳人薑大',
+   herbs:'吳茱萸、人參、生薑、大棗'},
+  {id:'018',ex:'e1',cat:'溫中祛寒',name:'小建中湯',
+   effect:'溫中補益，和裏緩急',
+   pattern:'中氣虛寒，陰陽氣血失調，裏氣不和之證',
+   mnem:'大芍草，糖薑汁',
+   herbs:'桂枝、白芍、甘草、生薑、大棗、飴糖'},
+  // === 固澀類 ===
+  {id:'057',ex:'e2',cat:'澀精止遺',name:'金鎖固精丸',
+   effect:'補腎澀精',
+   pattern:'腎虛不固證',
+   mnem:'龍母欠臉圓',
+   herbs:'沙苑、芡實、蓮鬚、龍骨、牡蠣、蓮子'},
+  {id:'080',ex:'e2',cat:'澀精止遺',name:'桑螵蛸散',
+   effect:'調補心腎，澀精止遺',
+   pattern:'心腎兩虛，水火不濟證',
+   mnem:'志甲人菖骨苓螵當',
+   herbs:'桑螵蛸、遠志、石菖蒲、生龍骨、人參、茯苓、當歸、龜板'},
+  {id:'052',ex:'e2',cat:'止帶',name:'完帶湯',
+   effect:'補中健脾，化濕止帶',
+   pattern:'脾虛濕邪下注證',
+   mnem:'草人柴陳朮芥車藥蒼芍',
+   herbs:'白朮、山藥、人參、白芍、車前子、蒼朮、甘草、陳皮、荊芥穗、柴胡'},
+  {id:'150',ex:'e2',cat:'補養安神',name:'酸棗仁湯',
+   effect:'養血安神，清熱除煩',
+   pattern:'肝血不足，陰虛內熱，心神失養證',
+   mnem:'心酸找人甘之芎林',
+   herbs:'酸棗仁、知母、茯苓、川芎、甘草'},
+  {id:'024',ex:'e1',cat:'補養安神',name:'天王補心丹',
+   effect:'滋陰養血，補心安神',
+   pattern:'心腎兩虛，陰虛血少，虛火內擾證',
+   mnem:'生地梗丹玄志苓，參麥當天柏子酸',
+   herbs:'生地黃、酸棗仁、柏子仁、麥冬、天冬、五味子、當歸、遠志、丹參、玄參、茯苓、桔梗、人參'},
+  {id:'032',ex:'e1',cat:'補養安神',name:'甘麥大棗湯',
+   effect:'養心安神，和中緩急',
+   pattern:'肝鬱心虛臟躁證',
+   mnem:'甘麥大棗',
+   herbs:'小麥、炙甘草、大棗'},
+  // === 活血類 ===
+  {id:'046',ex:'e2',cat:'活血祛瘀',name:'血府逐瘀湯',
+   effect:'活血祛瘀，行氣止痛',
+   pattern:'瘀血內阻胸部，氣機鬱滯之胸中血瘀證',
+   mnem:'俏桃紅穿柴草要當牛耕地',
+   herbs:'桃仁、紅花、當歸、生地、赤芍、川芎、柴胡、枳殼、甘草、桔梗、牛膝'},
+  {id:'099',ex:'e3',cat:'活血祛瘀',name:'補陽還五湯',
+   effect:'補氣活血通絡',
+   pattern:'正氣虧虛，瘀血阻絡，筋脈肌肉失養之證',
+   mnem:'當地兇人持紅旗',
+   herbs:'黃耆、當歸尾、赤芍、地龍、川芎、桃仁、紅花'},
+  {id:'067',ex:'e2',cat:'活血祛瘀',name:'桂枝茯苓丸',
+   effect:'活血化瘀，緩消癥塊',
+   pattern:'瘀阻胞宮，血溢脈外，胎失所養之證',
+   mnem:'貴人服丹藥',
+   herbs:'桂枝、茯苓、牡丹皮、桃仁、赤芍'},
+  {id:'036',ex:'e1',cat:'溫經祛瘀',name:'生化湯',
+   effect:'活血化瘀，溫經止痛',
+   pattern:'產後體虛，寒凝血滯，瘀阻胞宮',
+   mnem:'將干逃歸川',
+   herbs:'當歸、川芎、桃仁、黑薑、炙甘草'},
+  {id:'095',ex:'e3',cat:'溫經祛瘀',name:'溫經湯',
+   effect:'溫經散寒，祛瘀養血',
+   pattern:'衝任虛寒而有瘀滯之證',
+   mnem:'熊皮貴，無人要，冬將夏，草當澆',
+   herbs:'當歸、川芎、白芍、吳茱萸、人參、桂枝、阿膠、牡丹皮、生薑、甘草、半夏、麥冬'},
+  {id:'017c',ex:'e1',cat:'活血祛瘀',name:'川芎茶調散',
+   effect:'疏風止痛',
+   pattern:'外感風邪頭痛證',
+   mnem:'草芎辛芥芷，羌風荷茶',
+   herbs:'川芎、白芷、甘草、羌活、荊芥、細辛、防風、薄荷、細茶'},
+  {id:'110',ex:'e3',cat:'活血祛瘀',name:'膈下逐瘀湯',
+   effect:'活血祛瘀，行氣止痛',
+   pattern:'瘀血結於膈下，氣滯血瘀之腹痛',
+   mnem:'五靈歸芍芎丹烏，延草香桃紅枳',
+   herbs:'五靈脂、當歸、赤芍、川芎、丹皮、烏藥、延胡索、甘草、香附、桃仁、紅花、枳殼'},
+  // === 祛濕類 ===
+  {id:'020',ex:'e1',cat:'利水滲濕',name:'五苓散',
+   effect:'利水滲濕，溫陽化氣',
+   pattern:'表邪未解內傳膀胱，寒凝氣化不行之證',
+   mnem:'臨櫃澤白豬',
+   herbs:'桂枝、茯苓、豬苓、白朮、澤瀉'},
+  {id:'021',ex:'e1',cat:'利水滲濕',name:'五皮飲',
+   effect:'利水消腫，理氣健脾',
+   pattern:'脾虛濕盛，氣滯水泛之證',
+   mnem:'伏大將陳桑',
+   herbs:'茯苓皮、大腹皮、生薑皮、陳皮、桑白皮'},
+  {id:'053',ex:'e2',cat:'利水滲濕',name:'防己黃耆湯',
+   effect:'益氣祛風，健脾利水',
+   pattern:'衛虛不固，外感受風邪，水濕鬱於肌表經絡之間證',
+   mnem:'草房黃找白漿',
+   herbs:'防己、黃耆、白朮、甘草、生薑、大棗'},
+  {id:'113',ex:'e3',cat:'利水滲濕',name:'豬苓湯',
+   effect:'利水清熱養陰',
+   pattern:'陰虛有熱之小便不利證',
+   mnem:'謝苓苓滑跤',
+   herbs:'豬苓、茯苓、滑石、澤瀉、阿膠'},
+  {id:'069',ex:'e2',cat:'祛濕清熱',name:'茵陳蒿湯',
+   effect:'清熱利濕退黃',
+   pattern:'濕與瘀熱，蘊結於裏之證',
+   mnem:'茵陳治黃',
+   herbs:'茵陳蒿、山梔子、大黃'},
+  {id:'034',ex:'e1',cat:'祛濕清熱',name:'甘露消毒丹',
+   effect:'利濕化濁，清熱解毒',
+   pattern:'邪在氣分，濕熱並重之證',
+   mnem:'芩香連母石射陳，菖蒲薄蔻通',
+   herbs:'滑石、茵陳蒿、黃芩、石菖蒲、木通、川貝母、射干、連翹、薄荷、白蔻仁、藿香'},
+  {id:'005',ex:'e1',cat:'祛濕清熱',name:'八正散',
+   effect:'清熱瀉火，利水通淋',
+   pattern:'濕熱下注膀胱，水道不利之證',
+   mnem:'黃梔萹屈麥燈通滑草車',
+   herbs:'木通、瞿麥、萹蓄、車前子、滑石、燈芯草、甘草梢、梔子、大黃'},
+  {id:'065',ex:'e2',cat:'溫化水濕',name:'苓桂朮甘湯',
+   effect:'健脾滲濕，溫化寒飲',
+   pattern:'中陽不足，飲停心下證',
+   mnem:'苓桂朮甘',
+   herbs:'茯苓、桂枝、白朮、甘草'},
+  {id:'074',ex:'e2',cat:'溫化水濕',name:'真武湯',
+   effect:'溫陽利水',
+   pattern:'腎陽虛水泛證',
+   mnem:'珠江富少林',
+   herbs:'熟附子、茯苓、白芍、白朮、生薑'},
+  {id:'058',ex:'e2',cat:'祛風勝濕',name:'羌活勝濕湯',
+   effect:'祛風勝濕',
+   pattern:'風濕在表證',
+   mnem:'高兄瘋蠻搶活幹',
+   herbs:'羌活、獨活、蒿本、防風、蔓荊子、川芎、甘草'},
+  {id:'111',ex:'e3',cat:'祛風勝濕',name:'獨活寄生湯',
+   effect:'祛風濕，止痺痛，益肝腎，補氣血',
+   pattern:'肝腎不足，氣血兩虛，風寒濕痺阻於筋骨之證',
+   mnem:'情人細心獨寄貴藥，杜兄放牛歸伏草地',
+   herbs:'獨活、桑寄生、秦艽、防風、細辛、川芎、當歸、芍藥、熟地、桂心、茯苓、杜仲、川牛膝、人參、甘草'},
+  {id:'103',ex:'e3',cat:'祛濕清熱',name:'當歸拈痛湯',
+   effect:'利濕清熱，疏風止痛',
+   pattern:'濕熱內蘊，外受風邪證',
+   mnem:'陳媽葛母豬甘苦，租槍防身當擒白蟹',
+   herbs:'當歸、葛根、防風、升麻、澤瀉、豬苓、茵陳、黃芩、蒼朮、苦參、知母、甘草、羌活、白朮、人參'},
+  // === 化痰類 ===
+  {id:'003',ex:'e1',cat:'燥濕化痰',name:'二陳湯',
+   effect:'燥濕化痰，理氣和中',
+   pattern:'脾虛失運，濕聚成痰證',
+   mnem:'陳夏領草',
+   herbs:'半夏、陳皮、茯苓、甘草'},
+  {id:'094',ex:'e3',cat:'燥濕化痰',name:'溫膽湯',
+   effect:'理氣化痰，清膽和胃',
+   pattern:'膽胃不和，痰熱內擾證',
+   mnem:'珠江下令早食柑橘',
+   herbs:'陳皮、半夏、茯苓、甘草、竹茹、枳實、生薑、大棗'},
+  {id:'040',ex:'e1',cat:'燥濕化痰',name:'半夏厚朴湯',
+   effect:'行氣散結，降逆化痰',
+   pattern:'痰氣鬱結，肺胃宣降失常證',
+   mnem:'夏厚薑茯蘇',
+   herbs:'半夏、厚朴、茯苓、蘇葉、生薑'},
+  // === 降逆類 ===
+  {id:'087',ex:'e3',cat:'降逆止嘔',name:'旋覆代赭石湯',
+   effect:'降氣化痰，益氣和胃',
+   pattern:'胃虛痰阻，氣逆不降之證',
+   mnem:'將干瞎找戴花人',
+   herbs:'旋覆花、代赭石、甘草、大棗、人參、生薑、半夏'},
+  {id:'081',ex:'e3',cat:'降逆止嘔',name:'橘皮竹茹湯',
+   effect:'降逆止呃，益氣清熱',
+   pattern:'胃虛有熱，氣逆不降之證',
+   mnem:'江大人煮皮草',
+   herbs:'橘皮、竹茹、人參、甘草、生薑、大棗'},
+  // === 消食類 ===
+  {id:'063',ex:'e2',cat:'消食化滯',name:'保和丸',
+   effect:'消食和胃',
+   pattern:'飲食過量，食積中阻，傳導失常證',
+   mnem:'神父下山敲沉來',
+   herbs:'山楂、神麴、半夏、茯苓、連翹、陳皮、萊菔子'},
+  // === 化濕類 ===
+  {id:'031',ex:'e1',cat:'芳香化濕',name:'平胃散',
+   effect:'燥濕運脾，行氣和胃',
+   pattern:'濕滯脾胃證',
+   mnem:'厚煮草皮＋薑棗',
+   herbs:'蒼朮、厚朴、陳皮、甘草、生薑、大棗'},
+  {id:'118',ex:'e3',cat:'芳香化濕',name:'藿香正氣散',
+   effect:'解表化濕，理氣和中',
+   pattern:'外感風寒，內傷濕滯證',
+   mnem:'陳姐服下腹皮草後，想找江蘇白蜘蛛',
+   herbs:'藿香、半夏、白朮、茯苓、厚朴、陳皮、大棗、生薑、桔梗、大腹皮、白芷、炙甘草、紫蘇'},
+  // === 風方類 ===
+  {id:'019',ex:'e1',cat:'疏散外風',name:'小活絡丹',
+   effect:'祛風除濕，化瘀通絡，活血止痛',
+   pattern:'風寒濕痺證',
+   mnem:'活絡二烏沒乳難隆',
+   herbs:'川烏、草烏、天南星、地龍、乳香、沒藥'},
+  {id:'072',ex:'e2',cat:'疏散外風',name:'消風散',
+   effect:'疏風養血，清熱除濕',
+   pattern:'風濕熱毒浸淫血脈，鬱於肌腠所造成之風疹、濕疹',
+   mnem:'謹防饞牛通倉庫，十畝草地歸胡媽',
+   herbs:'荊芥、防風、當歸、生地、苦參、蒼朮、蟬蛻、胡麻仁、牛旁子、知母、石膏、甘草、木通'},
+  {id:'026',ex:'e1',cat:'平肝熄風',name:'天麻鉤藤飲',
+   effect:'平肝熄風，清熱活血，補益肝腎',
+   pattern:'肝陽上亢，肝熱肝風上擾證',
+   mnem:'天麻鉤藤夜交決寄，茯神芩牛仲梔益',
+   herbs:'天麻、鉤藤、石決明、梔子、牛膝、杜仲、黃芩、夜交藤、益母草、桑寄生、茯神'},
+  // === 止咳類 ===
+  {id:'059',ex:'e2',cat:'降逆平喘',name:'定喘湯',
+   effect:'宣肺降氣，清熱化痰',
+   pattern:'外感風寒，痰熱內蘊之哮喘',
+   mnem:'桑叔炒白果黃，杏拌麻花',
+   herbs:'白果肉、麻黃、蘇子、杏仁、款冬花、桑白皮、黃芩、半夏、甘草'},
+  {id:'119',ex:'e3',cat:'降逆平喘',name:'蘇子降氣湯',
+   effect:'降氣平喘，祛痰止咳',
+   pattern:'痰涎壅盛，上盛下虛之喘咳證',
+   mnem:'蘇子葉找肉鋪，盛夏歸草湖',
+   herbs:'蘇子、半夏、陳皮、厚朴、前胡、當歸、肉桂、生薑、甘草、大棗'},
+  // === 理氣類 ===
+  {id:'100',ex:'e3',cat:'疏肝理氣',name:'越鞠丸',
+   effect:'行氣解鬱',
+   pattern:'肝脾氣機鬱滯之鬱證',
+   mnem:'父子唱川曲',
+   herbs:'香附、蒼朮、梔子、川芎、神麴'},
+  // === 葛根湯類 ===
+  {id:'105',ex:'e3',cat:'辛溫解表',name:'葛根湯',
+   effect:'發汗解肌，升津舒筋',
+   pattern:'外感風寒，項背強直之太陽病',
+   mnem:'桂枝湯加葛根麻黃',
+   herbs:'葛根、麻黃、桂枝、芍藥、炙甘草、大棗、生薑'},
+  {id:'106',ex:'e3',cat:'解表清裏',name:'葛根芩連湯',
+   effect:'解表清裏',
+   pattern:'外感表證未解，熱邪入裏證',
+   mnem:'葛芩連草',
+   herbs:'葛根、黃芩、黃連、甘草'},
+  // ===== 新增補全：第一批 e1（11方）=====
+  {id:'n1',ex:'e1',cat:'清熱升提',name:'乙字湯',
+   effect:'升提下陷，清熱解毒',
+   pattern:'肛門疾患（痔瘡、肛裂、脫肛）伴濕熱下注，大便不通',
+   mnem:'歸柴黃大草升',
+   herbs:'當歸、柴胡、黃芩、大黃、甘草、升麻'},
+  {id:'n6',ex:'e1',cat:'氣血雙補',name:'十全大補湯',
+   effect:'溫補氣血',
+   pattern:'氣血俱虛，倦怠乏力，面色萎白，瘡瘍不斂之虛勞諸證',
+   mnem:'人築你吵，歸公掃地＋黃耆肉桂薑棗',
+   herbs:'肉桂、黃耆、人參、白朮、茯苓、甘草、當歸、熟地、白芍、川芎、生薑、大棗'},
+  {id:'n7',ex:'e1',cat:'氣血雙補',name:'人參養榮湯',
+   effect:'益氣補血，養心安神',
+   pattern:'積勞虛損，氣血不足，心脾兩虛，心悸怔忡，倦怠少食',
+   mnem:'四君四物－川芎＋五味遠志陳皮桂心',
+   herbs:'人參、白朮、茯苓、甘草、當歸、白芍、熟地、黃耆、桂心、五味子、陳皮、遠志、薑、棗'},
+  {id:'n8',ex:'e1',cat:'祛濕清熱',name:'八味帶下方',
+   effect:'清熱利濕，解毒止帶',
+   pattern:'濕熱下注，帶下色黃臭穢難聞',
+   mnem:'土歸芎木，茯陳金花大',
+   herbs:'土茯苓、當歸、川芎、木通、茯苓、陳皮、金銀花、大黃'},
+  {id:'n10',ex:'e1',cat:'清熱瀉火',name:'三黃瀉心湯',
+   effect:'瀉火解毒，燥濕止血',
+   pattern:'邪火內盛，迫血妄行之吐血衄血；或心下痞，按之濡，脈關上浮',
+   mnem:'大黃黃芩黃連',
+   herbs:'大黃、黃芩、黃連'},
+  {id:'n15',ex:'e1',cat:'辛溫解表',name:'大青龍湯',
+   effect:'發汗解表，清熱除煩',
+   pattern:'外感風寒，內有鬱熱，不汗出而煩躁之表寒裏熱證',
+   mnem:'麻黃湯＋石膏薑棗',
+   herbs:'麻黃、桂枝、炙甘草、杏仁、石膏、薑、棗'},
+  {id:'n23',ex:'e1',cat:'止咳化痰',name:'止嗽散',
+   effect:'宣利肺氣，疏風止咳',
+   pattern:'風邪犯肺，肺氣失宣，咳嗽咽癢，微有惡風發熱之證',
+   mnem:'陳梗借錢百草園',
+   herbs:'桔梗、荊芥、紫苑、百部、白前、甘草、陳皮'},
+  {id:'n25',ex:'e1',cat:'溫經祛瘀',name:'少腹逐淤湯',
+   effect:'活血祛瘀，溫經止痛',
+   pattern:'寒凝血瘀，少腹積塊疼痛，月經色黑有血塊，痛經',
+   mnem:'回家延沒歸宮，貴少仆靈',
+   herbs:'小茴香、乾薑、延胡索、沒藥、當歸、川芎、肉桂、赤芍、蒲黃、五靈脂'},
+  {id:'n33',ex:'e1',cat:'清虛熱',name:'甘露飲',
+   effect:'清熱利濕，滋陰降火',
+   pattern:'胃中濕熱，陰液不足，口瘡齒衄，齒根宣露，咽喉腫痛',
+   mnem:'天麥生熟石茵芩殼枇甘',
+   herbs:'天冬、麥冬、生地、熟地、石斛、茵陳、黃芩、枳殼、枇杷葉、甘草'},
+  {id:'n35',ex:'e1',cat:'調和肝脾',name:'加味逍遙散',
+   effect:'疏肝清熱，健脾養血',
+   pattern:'肝鬱化火，脾虛血虧，月經不調，煩躁易怒，潮熱盜汗',
+   mnem:'丹梔逍遙朮薑荷，芍苓柴當甘',
+   herbs:'丹皮、梔子、柴胡、當歸、白朮、白芍、茯苓、甘草、薄荷、煨薑'},
+  {id:'n39',ex:'e1',cat:'燥濕化痰',name:'半夏朮麻湯',
+   effect:'燥濕化痰，平肝熄風',
+   pattern:'痰飲上逆，風痰上擾之眩暈頭痛，惡心嘔吐，倦怠乏力',
+   mnem:'陳半茯白天蒼薑麥麴耆參澤柏',
+   herbs:'陳皮、半夏、茯苓、白朮、天麻、蒼朮、乾薑、麥芽、神麴、黃耆、人參、澤瀉、黃柏'},
+  // ===== 新增補全：第二批 e2（11方）=====
+  {id:'n44',ex:'e2',cat:'溫中祛寒',name:'安中散',
+   effect:'溫中散寒，理氣止痛',
+   pattern:'中焦虛寒，氣滯作痛，胃脘冷痛，泛吐清水',
+   mnem:'延胡殺良將，牡蠣甘願回歸',
+   herbs:'甘草、延胡索、良薑、砂仁、小茴香、肉桂、牡蠣'},
+  {id:'n49',ex:'e2',cat:'通鼻竅',name:'辛夷散',
+   effect:'祛風散寒，通利鼻竅',
+   pattern:'風寒客肺，鼻塞流清涕，頭痛之鼻淵寒證',
+   mnem:'高升細心，白川防風通甘',
+   herbs:'辛夷、升麻、甘草、白芷、蒿本、防風、川芎、細辛、木通、細茶葉'},
+  {id:'n50',ex:'e2',cat:'通鼻竅',name:'辛夷清肺飲',
+   effect:'清肺瀉熱，通利鼻竅',
+   pattern:'肺熱上壅，鼻流黃濁涕，鼻塞頭痛之鼻淵熱證',
+   mnem:'石知黃梔，枇百麥升甘',
+   herbs:'辛夷、升麻、甘草、梔子、黃芩、石膏、知母、百合、麥門冬、枇杷葉'},
+  {id:'n51',ex:'e2',cat:'補陰',name:'杞菊地黃丸',
+   effect:'滋腎養肝，清熱明目',
+   pattern:'肝腎陰虛，目昏眼花，視力減退，眼目乾澀',
+   mnem:'六味地黃加杞菊',
+   herbs:'熟地、山藥、山茱萸、茯苓、澤瀉、丹皮、枸杞、菊花'},
+  {id:'n56',ex:'e2',cat:'清燥',name:'沙參麥冬飲',
+   effect:'清養肺胃，生津潤燥',
+   pattern:'燥傷肺胃陰分，咽乾口燥，乾咳少痰，身熱脈數',
+   mnem:'沙麥見花，桑葉扁了玉竹甘',
+   herbs:'沙參、麥冬、玉竹、桑葉、天花粉、扁豆、甘草'},
+  {id:'n61',ex:'e2',cat:'祛濕清熱',name:'胃苓湯',
+   effect:'祛濕和胃，行氣利水',
+   pattern:'脾胃傷濕，停飲夾食，水瀉如注，小便短少',
+   mnem:'平胃散＋五苓散',
+   herbs:'蒼朮、厚朴、陳皮、甘草、白朮、茯苓、豬苓、澤瀉、肉桂、生薑、大棗'},
+  {id:'n62',ex:'e2',cat:'補氣',name:'香砂六君子湯',
+   effect:'益氣健脾，行氣化痰',
+   pattern:'脾胃氣虛，痰阻氣滯，嘔逆痞悶，不思飲食',
+   mnem:'人築你吵＋陳皮半夏木香砂仁',
+   herbs:'木香、砂仁、人參、半夏、白朮、茯苓、陳皮、甘草'},
+  {id:'n64',ex:'e2',cat:'補血',name:'保產無憂方',
+   effect:'補氣養血，理氣安胎',
+   pattern:'氣血不足，胎動不安，習慣性流產，或臨產難產',
+   mnem:'姜太公歸芎起義，驚恐吐貝殼，厚少乾',
+   herbs:'厚朴、艾葉、當歸、川芎、黃耆、荊芥、川貝母、菟絲子、羌活、甘草、枳殼、白芍、生薑'},
+  {id:'n68',ex:'e2',cat:'祛風勝濕',name:'桂枝芍藥知母湯',
+   effect:'祛風除濕，溫經散寒，滋陰清熱',
+   pattern:'風濕歷節，骨節腫痛，身體羸瘦，腳腫如脫，頭眩欲吐',
+   mnem:'桂芍知道，麻煩父子，防止白乾薑',
+   herbs:'桂枝、芍藥、知母、白朮、防風、甘草、麻黃、附子、生薑'},
+  {id:'n75',ex:'e2',cat:'清熱解毒',name:'真人活命飲',
+   effect:'清熱解毒，消腫潰堅，活血止痛',
+   pattern:'陽性瘡瘍初起，紅腫熱痛，尚未成膿之癰腫',
+   mnem:'真人拿金銀，防止白鬼陳皮，早穿乳沒貝花甘',
+   herbs:'金銀花、陳皮、當歸尾、防風、白芷、甘草、貝母、天花粉、乳香、沒藥、皂角刺、穿山甲'},
+  {id:'n77',ex:'e2',cat:'和解少陽',name:'柴胡加龍牡湯',
+   effect:'和解少陽，通陽瀉熱，重鎮安神',
+   pattern:'傷寒誤下，少陽邪熱內陷，胸滿煩驚，譫語，身重難以轉側',
+   mnem:'柴夫驚找伴，龍牡鉛大黃，參苓桂芩',
+   herbs:'柴胡、半夏、茯苓、桂枝、黃芩、大棗、人參、龍骨、牡蠣、大黃、生薑、鉛丹'},
+  // ===== 新增補全：第三批 e3（12方）=====
+  {id:'n82',ex:'e3',cat:'清熱瀉火',name:'涼膈散',
+   effect:'瀉火通便，清上瀉下',
+   pattern:'上中二焦積熱，胸膈鬱熱，煩躁口渴，口舌生瘡，便秘',
+   mnem:'兩個蜜柑請主教，知大勃翹',
+   herbs:'連翹、竹葉、薄荷、黃芩、甘草、梔子、大黃、芒硝'},
+  {id:'n86',ex:'e3',cat:'清熱解毒',name:'清心蓮子飲',
+   effect:'清心火，益氣養陰，止淋濁',
+   pattern:'心火上炎，氣陰兩虛，濕熱下注之淋濁帶下，遺精白濁',
+   mnem:'蓮子心中茯人參，麥地芩草車',
+   herbs:'石蓮子、麥冬、茯苓、人參、車前子、黃芩、黃耆、地骨皮、甘草'},
+  {id:'n92',ex:'e3',cat:'清熱解毒',name:'清上防風湯',
+   effect:'清熱解毒，疏風瀉火',
+   pattern:'風熱上攻頭面，頭面生瘡，痤瘡，口舌生瘡，咽喉腫痛',
+   mnem:'防翹荊芷芩川薄，連梔殼草桔',
+   herbs:'防風、連翹、荊芥、白芷、黃芩、川芎、薄荷、黃連、梔子、枳殼、甘草、桔梗'},
+  {id:'n96',ex:'e3',cat:'清熱養血',name:'溫清湯',
+   effect:'清熱燥濕，養血活血',
+   pattern:'血虛有熱，月經不調，帶下赤白，各種皮膚病',
+   mnem:'四物湯加黃連解毒湯，再添生地',
+   herbs:'熟地、白芍、當歸、川芎、黃芩、黃連、黃柏、梔子、生地'},
+  {id:'n101',ex:'e3',cat:'清熱解毒',name:'散腫潰堅湯',
+   effect:'清熱化痰，軟堅散結',
+   pattern:'痰熱互結，瘰癧癭瘤，積聚腫塊，堅硬不消',
+   mnem:'三黃知母膽大昆，柴升葛翹花梗草，三稜莪朮歸芍尾',
+   herbs:'黃芩、知母、黃柏、桔梗、黃連、花粉、葛根、龍膽草、昆布、柴胡、升麻、連翹、甘草、三稜、莪朮、歸尾、白芍'},
+  {id:'n102',ex:'e3',cat:'活血祛瘀',name:'疏經活血湯',
+   effect:'活血舒筋，祛風除濕',
+   pattern:'氣血凝滯，風濕痹痛，肢體麻木，腰腿疼痛',
+   mnem:'歸地芎芍桃牛靈，防防龍羌芷，蒼茯陳薑草',
+   herbs:'當歸、生地、蒼朮、川芎、桃仁、茯苓、芍藥、牛膝、威靈仙、防己、羌活、防風、龍膽草、生薑、陳皮、白芷、甘草'},
+  {id:'n104',ex:'e3',cat:'調和肝脾',name:'當歸芍藥散',
+   effect:'養血疏肝，健脾利濕',
+   pattern:'婦人妊娠或月經不調，肝脾失調，腹中拘急，綿綿作痛，小便不利',
+   mnem:'歸芍芎，苓朮澤',
+   herbs:'當歸、芍藥、川芎、茯苓、白朮、澤瀉'},
+  {id:'n109',ex:'e3',cat:'通鼻竅',name:'蒼耳散',
+   effect:'散風邪，通鼻竅',
+   pattern:'風熱上攻，鼻流黃濁涕，鼻塞頭痛之鼻淵',
+   mnem:'蒼耳辛夷芷薄，蔥茶',
+   herbs:'蒼耳子、辛夷、白芷、薄荷、蔥白、細茶'},
+  {id:'n114',ex:'e3',cat:'補陽',name:'濟生腎氣丸',
+   effect:'溫腎化氣，利水消腫',
+   pattern:'腎陽不足，水濕不化，腰重腳重，小便不利，水腫脹滿',
+   mnem:'六味地黃加附桂，車前牛膝濟生醫',
+   herbs:'熟地、山茱萸、山藥、牡丹皮、茯苓、澤瀉、肉桂、附子、車前子、牛膝'},
+  {id:'n115',ex:'e3',cat:'祛風勝濕',name:'薏苡仁湯',
+   effect:'祛風除濕，散寒通絡',
+   pattern:'風寒濕痹，關節疼痛，屈伸不利，肌肉腫痛',
+   mnem:'薏苡當蒼麻桂芍，草薑',
+   herbs:'薏苡仁、當歸、蒼朮、麻黃、桂枝、白芍、炙甘草、生薑'},
+  {id:'n116',ex:'e3',cat:'補陽',name:'還少丹',
+   effect:'溫補脾腎，填精養血',
+   pattern:'脾腎不足，精血虧損，腰膝痿軟，陽痿遺精，鬚髮早白',
+   mnem:'山牛茯茱楮杜五，巴蓉遠志茴石熟，杞棗',
+   herbs:'山藥、牛膝、茯苓、山茱萸、楮實子、杜仲、五味子、巴戟天、肉蓯蓉、遠志、小茴香、石菖蒲、熟地、枸杞子、大棗'},
+  {id:'n120',ex:'e3',cat:'祛風勝濕',name:'蠲痺湯',
+   effect:'益氣和營，祛風除濕',
+   pattern:'營衛兩虛，風寒濕痹，肩臂疼痛，肢體麻木',
+   mnem:'耆歸赤羌防薑草，薑大棗',
+   herbs:'黃耆、當歸、赤芍、羌活、防風、薑黃、甘草、生薑、大棗'},
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+let status={};
+let showHerbs=false;
+let filterEx='all';
+let filterSt='all';
+let fcMode='name2effect';
+let fcExam='all';
+let fcQueue=[];
+let fcIdx=0;
+let fcFlipped=false;
+
+try{const s=localStorage.getItem('fzh2');if(s)status=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem('fzh2',JSON.stringify(status));}catch(e){}}
+
+// Update header count
+document.getElementById('total-badge').textContent=`共 ${DATA.length} 方`;
+
+// ============================================================
+//  TABS
+// ============================================================
+function showTab(n,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  btn.classList.add('active');
+  if(n==='cards')render();
+  if(n==='stats')renderStats();
+  if(n==='flash')initFc();
+}
+
+// ============================================================
+//  CARDS
+// ============================================================
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const filtered=DATA.filter(d=>{
+    const me=filterEx==='all'||d.ex===filterEx;
+    const ms=filterSt==='all'||(status[d.id]||'none')===filterSt;
+    const mq=!q||d.name.includes(q)||d.effect.includes(q)||d.pattern.includes(q)||d.herbs.includes(q)||d.mnem.includes(q)||d.cat.includes(q);
+    return me&&ms&&mq;
+  });
+  document.getElementById('rcount').innerHTML=`顯示 <span>${filtered.length}</span> / ${DATA.length} 方`;
+  document.getElementById('cgrid').innerHTML=filtered.map(d=>{
+    const st=status[d.id]||'none';
+    const exClass={e1:'e1',e2:'e2',e3:'e3'}[d.ex];
+    const exLabel={e1:'1–40',e2:'41–80',e3:'81–120'}[d.ex];
+    return`<div class="fcard2 ${st!=='none'?'s-'+st:''}">
+      <div class="card-head">
+        <div class="card-name">${d.name}</div>
+        <div class="card-meta">
+          <span class="tag-cat">${d.cat}</span>
+          <span class="tag-ex ${exClass}">${exLabel}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="row-label">功效</div>
+          <div class="row-val effect">${d.effect}</div>
+        </div>
+        <div>
+          <div class="row-label">證型</div>
+          <div class="row-val pattern">${d.pattern}</div>
+        </div>
+        <div>
+          <div class="row-label">口訣</div>
+          <div class="row-val mnem">${d.mnem}</div>
+        </div>
+        <div>
+          <div class="row-label">藥材</div>
+          <div class="row-val herbs ${showHerbs?'':'herbs-hidden'}">${d.herbs}</div>
+          ${!showHerbs?'<div style="font-size:0.62rem;color:var(--border2)">按「顯示藥材」展開</div>':''}
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="abtn ${st==='unfamiliar'?'a-u':''}" onclick="setSt('${d.id}','unfamiliar',event)">🔴 不熟</button>
+        <button class="abtn ${st==='reviewing'?'a-r':''}" onclick="setSt('${d.id}','reviewing',event)">🟡 複習中</button>
+        <button class="abtn ${st==='mastered'?'a-m':''}" onclick="setSt('${d.id}','mastered',event)">🟢 已掌握</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setSt(id,st,e){
+  e.stopPropagation();
+  if(status[id]===st)delete status[id]; else status[id]=st;
+  save();render();
+}
+
+function setEx(ex,btn){
+  filterEx=ex;
+  ['ex-all','ex-e1','ex-e2','ex-e3'].forEach(id=>{
+    const b=document.getElementById(id);
+    b.classList.remove('on','on-g','on-p');
+  });
+  if(ex==='all')btn.classList.add('on');
+  else if(ex==='e1')btn.classList.add('on');
+  else if(ex==='e2')btn.classList.add('on-g');
+  else btn.classList.add('on-p');
+  render();
+}
+
+function setSt2(st,btn){
+  filterSt=st;
+  ['st-all','st-u','st-r','st-m'].forEach(id=>{
+    const b=document.getElementById(id);
+    b.classList.remove('on','on-r','on-b','on-g');
+  });
+  if(st==='all')btn.classList.add('on');
+  else if(st==='unfamiliar')btn.classList.add('on-r');
+  else if(st==='reviewing')btn.classList.add('on');
+  else btn.classList.add('on-g');
+  render();
+}
+
+// wire up status filter buttons
+document.getElementById('st-all').onclick=function(){setSt2('all',this);};
+document.getElementById('st-u').onclick=function(){setSt2('unfamiliar',this);};
+document.getElementById('st-r').onclick=function(){setSt2('reviewing',this);};
+document.getElementById('st-m').onclick=function(){setSt2('mastered',this);};
+
+function toggleHerbs(){
+  showHerbs=!showHerbs;
+  document.getElementById('herb-toggle').textContent=showHerbs?'隱藏藥材':'顯示藥材';
+  render();
+}
+
+// ============================================================
+//  FLASHCARD
+// ============================================================
+function setFcMode(m,btn){
+  fcMode=m;
+  document.querySelectorAll('.fcm').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  initFc();
+}
+
+function setFcEx(ex,btn){
+  fcExam=ex;
+  document.querySelectorAll('.fc-range .fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  initFc();
+}
+
+function initFc(){
+  let pool=fcExam==='all'?[...DATA]:DATA.filter(d=>d.ex===fcExam);
+  if(fcMode==='weak'){
+    let w=pool.filter(d=>status[d.id]==='unfamiliar');
+    if(!w.length)w=pool.filter(d=>status[d.id]!=='mastered');
+    if(!w.length)w=[...pool];
+    fcQueue=[...w];
+  }else{
+    fcQueue=[...pool];
+  }
+  // shuffle
+  for(let i=fcQueue.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [fcQueue[i],fcQueue[j]]=[fcQueue[j],fcQueue[i]];
+  }
+  fcIdx=0;fcFlipped=false;
+  renderFc();
+}
+
+function renderFc(){
+  if(!fcQueue.length){
+    document.getElementById('fc-question').textContent='沒有符合方劑';
+    document.getElementById('fc-cnt').textContent='0/0';
+    return;
+  }
+  const d=fcQueue[fcIdx];
+  document.getElementById('fc-cnt').textContent=`${fcIdx+1}/${fcQueue.length}`;
+  document.getElementById('fc-answer').style.display='none';
+  document.getElementById('fc-effect').style.display='none';
+  document.getElementById('fc-hint').style.display='block';
+  fcFlipped=false;
+  let label='',q='';
+  if(fcMode==='name2effect'||fcMode==='weak'){
+    label='方名 → 功效＋證型';q=d.name;
+  }else if(fcMode==='mnem2herb'){
+    label='口訣 → 藥材組成';q=d.mnem;
+  }else if(fcMode==='pattern2name'){
+    label='證型 → 方名';q=d.pattern;
+  }
+  document.getElementById('fc-qlabel').textContent=label;
+  document.getElementById('fc-question').textContent=q;
+}
+
+function flip(){
+  if(!fcQueue.length)return;
+  const d=fcQueue[fcIdx];
+  fcFlipped=!fcFlipped;
+  const ans=document.getElementById('fc-answer');
+  const eff=document.getElementById('fc-effect');
+  const hint=document.getElementById('fc-hint');
+  if(fcFlipped){
+    hint.style.display='none';
+    if(fcMode==='name2effect'||fcMode==='weak'){
+      ans.textContent='功效：'+d.effect;ans.style.display='block';
+      eff.textContent='證型：'+d.pattern+'\n口訣：'+d.mnem;eff.style.display='block';
+    }else if(fcMode==='mnem2herb'){
+      ans.textContent=d.herbs;ans.style.display='block';
+      eff.textContent='方名：'+d.name+'　功效：'+d.effect;eff.style.display='block';
+    }else if(fcMode==='pattern2name'){
+      ans.textContent='▶ '+d.name;ans.style.display='block';
+      eff.textContent='功效：'+d.effect+'\n口訣：'+d.mnem;eff.style.display='block';
+    }
+  }else{
+    ans.style.display='none';eff.style.display='none';hint.style.display='block';
+  }
+}
+
+function nextFc(){if(!fcQueue.length)return;fcIdx=(fcIdx+1)%fcQueue.length;renderFc();}
+function prevFc(){if(!fcQueue.length)return;fcIdx=(fcIdx-1+fcQueue.length)%fcQueue.length;renderFc();}
+function markFc(st){
+  if(!fcQueue.length)return;
+  status[fcQueue[fcIdx].id]=st;save();nextFc();
+}
+
+// ============================================================
+//  STATS
+// ============================================================
+function renderStats(){
+  const tot=DATA.length;
+  const m=DATA.filter(d=>status[d.id]==='mastered').length;
+  const r=DATA.filter(d=>status[d.id]==='reviewing').length;
+  const u=DATA.filter(d=>status[d.id]==='unfamiliar').length;
+  const none=tot-m-r-u;
+  document.getElementById('stats-grid').innerHTML=`
+    <div class="scard"><div class="snum" style="color:var(--gold2)">${tot}</div><div class="slbl">整合總方數</div></div>
+    <div class="scard"><div class="snum" style="color:var(--green2)">${m}</div><div class="slbl">已掌握 ${tot?Math.round(m/tot*100):0}%</div></div>
+    <div class="scard"><div class="snum" style="color:var(--gold2)">${r}</div><div class="slbl">複習中</div></div>
+    <div class="scard"><div class="snum" style="color:var(--red2)">${u}</div><div class="slbl">不熟</div></div>
+    <div class="scard"><div class="snum" style="color:var(--muted)">${none}</div><div class="slbl">未標記</div></div>`;
+  const batches=[
+    {k:'e1',l:'第一批 1–40',col:'var(--gold)'},
+    {k:'e2',l:'第二批 41–80',col:'var(--green)'},
+    {k:'e3',l:'第三批 81–120',col:'var(--purple)'},
+  ];
+  document.getElementById('prog-rows').innerHTML=batches.map(b=>{
+    const p=DATA.filter(d=>d.ex===b.k);
+    const pm=p.filter(d=>status[d.id]==='mastered').length;
+    const pct=p.length?Math.round(pm/p.length*100):0;
+    return`<div class="prog-row">
+      <div class="prog-lbl">${b.l}</div>
+      <div class="prog-tr"><div class="prog-fill" style="width:${pct}%;background:${b.col}"></div></div>
+      <div class="prog-pct">${pm}/${p.length}</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+render();
+initFc();
+</script>
+</body>
+</html>

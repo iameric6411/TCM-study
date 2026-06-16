@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>內科 120 方 · 整合複習計劃</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+:root{
+  --bg:#0f0e0c;--surface:#1a1814;--surface2:#221f1a;
+  --border:#2e2a24;--border2:#3d3830;
+  --text:#e8dfc8;--muted:#7a7060;--muted2:#9a8e78;
+  --gold:#c9a84c;--gold2:#e8c870;
+  --red:#c45c3a;--red2:#e07050;
+  --blue:#4a7fa8;--blue2:#6aafd8;
+  --green:#4a8a5a;--green2:#6ab87a;
+  --e1:#c9a84c;--e2:#4a8a5a;--e3:#7a5ca8;
+  --e1l:rgba(201,168,76,0.12);--e2l:rgba(74,138,90,0.12);--e3l:rgba(122,92,168,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:linear-gradient(135deg,#1a1510,#0f0e0c);border-bottom:1px solid var(--border);padding:1.8rem 2.5rem 1.5rem;position:relative;overflow:hidden;}
+header::before{content:'百方';font-family:'Noto Serif TC',serif;font-size:9rem;font-weight:900;color:rgba(201,168,76,0.04);position:absolute;right:-0.5rem;top:-1.5rem;line-height:1;pointer-events:none;}
+header h1{font-family:'Noto Serif TC',serif;font-size:1.5rem;font-weight:700;letter-spacing:0.08em;color:var(--gold2);margin-bottom:0.25rem;}
+header p{font-size:0.75rem;color:var(--muted);letter-spacing:0.1em;}
+.hexams{display:flex;gap:1rem;margin-top:0.9rem;flex-wrap:wrap;}
+.ebadge{padding:0.35rem 0.85rem;border-radius:4px;font-size:0.72rem;letter-spacing:0.05em;font-weight:500;display:flex;align-items:center;gap:0.4rem;}
+.ebadge.e1{background:var(--e1l);border:1px solid rgba(201,168,76,0.3);color:var(--gold2);}
+.ebadge.e2{background:var(--e2l);border:1px solid rgba(74,138,90,0.3);color:var(--green2);}
+.ebadge.e3{background:var(--e3l);border:1px solid rgba(122,92,168,0.3);color:#b09ae8;}
+.ebadge span{font-size:0.65rem;opacity:0.7;}
+nav{display:flex;border-bottom:1px solid var(--border);background:var(--surface);padding:0 2rem;overflow-x:auto;}
+nav button{padding:0.7rem 1.1rem;border:none;background:none;font-family:'Noto Sans TC',sans-serif;font-size:0.78rem;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all 0.2s;letter-spacing:0.04em;}
+nav button:hover{color:var(--text);}
+nav button.active{color:var(--gold2);border-bottom-color:var(--gold);}
+.main{padding:1.5rem 2rem 3rem;max-width:1200px;margin:0 auto;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
+section{margin-bottom:2.2rem;}
+section h2{font-family:'Noto Serif TC',serif;font-size:0.9rem;font-weight:600;color:var(--gold);margin-bottom:0.9rem;padding-bottom:0.45rem;border-bottom:1px solid var(--border2);letter-spacing:0.06em;}
+/* TIMELINE */
+.tl-row{display:grid;grid-template-columns:72px 1fr;gap:0;margin-bottom:0;}
+.tl-left{display:flex;flex-direction:column;align-items:center;padding-top:0.55rem;}
+.tl-dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--border2);background:var(--surface);flex-shrink:0;position:relative;z-index:2;}
+.tl-dot.e1{border-color:var(--e1);background:var(--e1);}
+.tl-dot.e2{border-color:var(--e2);background:var(--e2);}
+.tl-dot.e3{border-color:var(--e3);background:var(--e3);}
+.tl-dot.ph{border-color:var(--border2);background:var(--surface2);}
+.tl-line{flex:1;width:1px;background:var(--border);margin:3px 0;}
+.tl-content{padding:0.25rem 0 1.1rem 1rem;}
+.tl-date{font-size:0.67rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:0.15rem;}
+.tl-title{font-family:'Noto Serif TC',serif;font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.25rem;}
+.tl-title.e1{color:var(--gold2);}.tl-title.e2{color:var(--green2);}.tl-title.e3{color:#b09ae8;}
+.tl-desc{font-size:0.76rem;color:var(--muted2);line-height:1.65;}
+.tl-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.35rem;}
+.ttag{font-size:0.64rem;padding:0.1rem 0.4rem;border-radius:3px;}
+.ttag.e1{background:var(--e1l);color:var(--gold2);}
+.ttag.e2{background:var(--e2l);color:var(--green2);}
+.ttag.e3{background:var(--e3l);color:#b09ae8;}
+.ttag.info{background:rgba(74,127,168,0.12);color:var(--blue2);}
+/* PHASE CARDS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0.75rem;}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.pcard-head{padding:0.55rem 0.85rem;font-size:0.73rem;font-weight:500;letter-spacing:0.06em;display:flex;justify-content:space-between;}
+.pcard-head.e1{background:var(--e1l);color:var(--gold2);border-bottom:1px solid rgba(201,168,76,0.2);}
+.pcard-head.e2{background:var(--e2l);color:var(--green2);border-bottom:1px solid rgba(74,138,90,0.2);}
+.pcard-head.e3{background:var(--e3l);color:#b09ae8;border-bottom:1px solid rgba(122,92,168,0.2);}
+.pcard-body{padding:0.75rem 0.85rem;font-size:0.75rem;line-height:1.85;color:var(--muted2);}
+.pcard-body strong{color:var(--text);}
+/* TABLE */
+.wtable{width:100%;border-collapse:collapse;font-size:0.73rem;}
+.wtable th{background:var(--surface2);color:var(--muted2);padding:0.5rem 0.7rem;text-align:left;font-weight:500;letter-spacing:0.05em;border-bottom:1px solid var(--border);}
+.wtable td{padding:0.42rem 0.7rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;color:var(--muted2);}
+.wtable tr:hover td{background:rgba(255,255,255,0.02);}
+.pb{display:inline-block;padding:0.1rem 0.38rem;border-radius:3px;font-size:0.62rem;font-weight:500;}
+.pb.e1{background:rgba(201,168,76,0.15);color:var(--gold2);}
+.pb.e2{background:rgba(74,138,90,0.15);color:var(--green2);}
+.pb.e3{background:rgba(122,92,168,0.15);color:#b09ae8;}
+.pb.mix{background:rgba(74,127,168,0.15);color:var(--blue2);}
+.tip{background:rgba(74,127,168,0.08);border-left:2px solid var(--blue);border-radius:0 5px 5px 0;padding:0.65rem 0.9rem;font-size:0.76rem;line-height:1.7;color:var(--muted2);margin-bottom:0.9rem;}
+/* FILTER */
+.filter-bar{display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:0.9rem;align-items:center;}
+.filter-bar input{flex:1;min-width:160px;padding:0.42rem 0.75rem;border:1px solid var(--border2);border-radius:5px;font-family:'Noto Sans TC',sans-serif;font-size:0.78rem;background:var(--surface);color:var(--text);outline:none;}
+.filter-bar input:focus{border-color:var(--gold);}
+.fbtn{padding:0.38rem 0.75rem;border:1px solid var(--border2);border-radius:5px;background:var(--surface);font-family:'Noto Sans TC',sans-serif;font-size:0.7rem;cursor:pointer;color:var(--muted);transition:all 0.15s;white-space:nowrap;}
+.fbtn:hover{color:var(--text);}
+.fbtn.active{background:var(--surface2);color:var(--text);border-color:var(--border2);}
+.fbtn.ae1{background:var(--e1l);color:var(--gold2);border-color:rgba(201,168,76,0.4);}
+.fbtn.ae2{background:var(--e2l);color:var(--green2);border-color:rgba(74,138,90,0.4);}
+.fbtn.ae3{background:var(--e3l);color:#b09ae8;border-color:rgba(122,92,168,0.4);}
+/* FANG GRID */
+.fang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:0.7rem;}
+.fc2{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color 0.2s,transform 0.15s;}
+.fc2:hover{transform:translateY(-1px);border-color:var(--border2);}
+.fc2.mastered{border-color:rgba(74,138,90,0.45);}
+.fc2.reviewing{border-color:rgba(201,168,76,0.45);}
+.fc2.unfamiliar{border-color:rgba(196,92,58,0.45);}
+.fc2-head{padding:0.5rem 0.85rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.fc2-name{font-family:'Noto Serif TC',serif;font-size:0.92rem;font-weight:600;color:var(--text);}
+.fc2-meta{display:flex;gap:0.35rem;align-items:center;}
+.fc2-num{font-size:0.63rem;color:var(--muted);background:rgba(255,255,255,0.04);padding:0.1rem 0.32rem;border-radius:3px;}
+.edot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.edot.e1{background:var(--e1);}.edot.e2{background:var(--e2);}.edot.e3{background:var(--e3);}
+.fc2-body{padding:0.55rem 0.85rem;}
+.mlabel{font-size:0.6rem;color:var(--border2);letter-spacing:0.08em;margin-bottom:0.12rem;}
+.mnem{font-size:0.74rem;color:var(--blue2);line-height:1.5;margin-bottom:0.3rem;}
+.herbtxt{font-size:0.7rem;color:var(--muted);line-height:1.6;}
+.herbtxt.hidden{display:none;}
+.srow{display:flex;gap:0.38rem;padding:0.42rem 0.85rem;border-top:1px solid var(--border);}
+.sbtn{flex:1;padding:0.28rem;border:1px solid var(--border);border-radius:4px;font-family:'Noto Sans TC',sans-serif;font-size:0.62rem;cursor:pointer;background:none;transition:all 0.15s;color:var(--muted);}
+.sbtn:hover{background:var(--surface2);color:var(--text);}
+.sbtn.au{background:rgba(196,92,58,0.12);border-color:rgba(196,92,58,0.35);color:var(--red2);}
+.sbtn.ar{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.35);color:var(--gold2);}
+.sbtn.am{background:rgba(74,138,90,0.12);border-color:rgba(74,138,90,0.35);color:var(--green2);}
+/* FLASHCARD */
+.fc-ctrl{display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:0.9rem;align-items:center;}
+.fcm{padding:0.38rem 0.85rem;border:1px solid var(--border2);border-radius:20px;font-family:'Noto Sans TC',sans-serif;font-size:0.72rem;cursor:pointer;background:var(--surface);color:var(--muted);transition:all 0.15s;}
+.fcm:hover{color:var(--text);}
+.fcm.active{background:var(--e1l);color:var(--gold2);border-color:rgba(201,168,76,0.4);}
+.fc-filt{display:flex;gap:0.38rem;flex-wrap:wrap;margin-bottom:0.9rem;padding-top:0.5rem;border-top:1px solid var(--border);align-items:center;}
+.fc-filt span{font-size:0.7rem;color:var(--muted);}
+.fcwrap{display:flex;justify-content:center;margin-bottom:1.1rem;}
+.fcard{width:100%;max-width:500px;min-height:250px;background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;padding:2.2rem 1.8rem;text-align:center;cursor:pointer;user-select:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0.8rem;transition:box-shadow 0.2s;}
+.fcard:hover{box-shadow:0 4px 24px rgba(0,0,0,0.4);}
+.fql{font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;}
+.fqq{font-family:'Noto Serif TC',serif;font-size:1.6rem;font-weight:700;color:var(--gold2);line-height:1.3;}
+.fqa{font-size:0.83rem;color:var(--blue2);line-height:1.8;max-width:380px;}
+.fqh{font-size:0.7rem;color:var(--muted);line-height:1.7;max-width:380px;border-top:1px solid var(--border);padding-top:0.65rem;}
+.fqhint{font-size:0.62rem;color:var(--border2);}
+.fcnav{display:flex;justify-content:center;gap:0.7rem;align-items:center;margin-bottom:0.75rem;}
+.fcnav button{padding:0.45rem 1.2rem;border:1px solid var(--border2);border-radius:5px;background:var(--surface);font-family:'Noto Sans TC',sans-serif;font-size:0.76rem;cursor:pointer;color:var(--text);transition:all 0.15s;}
+.fcnav button:hover{background:var(--surface2);}
+.fccnt{font-size:0.76rem;color:var(--muted);min-width:55px;text-align:center;}
+.mrow{display:flex;gap:0.6rem;justify-content:center;}
+.mbtn{padding:0.42rem 1rem;border-radius:5px;font-family:'Noto Sans TC',sans-serif;font-size:0.72rem;cursor:pointer;transition:all 0.15s;}
+.mbu{background:rgba(196,92,58,0.1);border:1px solid rgba(196,92,58,0.3);color:var(--red2);}
+.mbr{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold2);}
+.mbm{background:rgba(74,138,90,0.1);border:1px solid rgba(74,138,90,0.3);color:var(--green2);}
+/* STATS */
+.stgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:0.65rem;margin-bottom:1.3rem;}
+.stcard{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.85rem;text-align:center;}
+.stnum{font-family:'Noto Serif TC',serif;font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:0.22rem;}
+.stlbl{font-size:0.65rem;color:var(--muted);letter-spacing:0.05em;}
+.eprow{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.55rem;}
+.eplbl{width:105px;font-size:0.73rem;color:var(--text);white-space:nowrap;}
+.eptr{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.epf{height:100%;border-radius:3px;transition:width 0.8s ease;}
+.epf.e1{background:var(--e1);}.epf.e2{background:var(--e2);}.epf.e3{background:var(--e3);}
+.eppct{width:38px;text-align:right;font-size:0.68rem;color:var(--muted);}
+.fbars{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem;}
+.brow{display:flex;align-items:center;gap:0.45rem;margin-bottom:0.3rem;}
+.blbl{width:95px;font-size:0.67rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btr{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.bfl{height:100%;border-radius:2px;transition:width 0.8s ease;}
+@media(max-width:600px){.main{padding:1rem;}header{padding:1.2rem;}.fang-grid{grid-template-columns:1fr;}.pgrid{grid-template-columns:1fr;}.fbars{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>內科 120 方　整合複習計劃</h1>
+  <p>三場考試全程備戰　2026.06.03 — 2027.04.16</p>
+  <div class="hexams">
+    <div class="ebadge e1">🟡 第一考 <span>2026/10/16 · 1–40方</span></div>
+    <div class="ebadge e2">🟢 第二考 <span>2027/02/26 · 41–80方</span></div>
+    <div class="ebadge e3">🟣 第三考 <span>2027/04/16 · 81–120方</span></div>
+  </div>
+</header>
+<nav>
+  <button class="active" onclick="showTab('plan',this)">📅 整合計劃</button>
+  <button onclick="showTab('cards',this)">📖 方劑卡片</button>
+  <button onclick="showTab('flash',this)">⚡ 閃卡練習</button>
+  <button onclick="showTab('stats',this)">📊 統計</button>
+</nav>
+<div class="main">
+
+<!-- PLAN -->
+<div id="tab-plan" class="tab-panel active">
+<section>
+  <h2>⏳ 全程時間軸（310天）</h2>
+  <div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot e1"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2026.06.03 — 2026.10.16　（135天）</div>
+        <div class="tl-title e1">第一階段：1–40方 四輪備戰</div>
+        <div class="tl-desc">每天一方，四輪間隔遞增。考後進入「維持模式」，每兩週快速閃卡一次防遺忘。</div>
+        <div class="tl-tags">
+          <span class="ttag e1">初識 6/3–7/13</span><span class="ttag e1">鞏固 7/14–8/22</span>
+          <span class="ttag e1">深化 8/23–9/21</span><span class="ttag e1">衝刺 9/22–10/16</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot ph"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2026.10.17 — 2026.11.16　（30天）</div>
+        <div class="tl-title">考後緩衝 + 41–80預讀</div>
+        <div class="tl-desc">休息1週後開始預讀41–80口訣輪廓；同步每週1次快掃1–40（約20分鐘閃卡）。</div>
+        <div class="tl-tags"><span class="ttag info">1–40 雙週維持</span><span class="ttag e2">41–80 口訣預讀</span></div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot e2"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2026.11.17 — 2027.02.26　（101天）</div>
+        <div class="tl-title e2">第二階段：41–80方 三輪備戰</div>
+        <div class="tl-desc">主力衝刺41–80，三輪複習。每週固定1次維持複習1–40（閃卡，弱方優先）。</div>
+        <div class="tl-tags">
+          <span class="ttag e2">初識 11/17–12/26</span><span class="ttag e2">深化 12/27–1/25</span>
+          <span class="ttag e2">衝刺 1/26–2/26</span><span class="ttag info">1–40 週維持</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot ph"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2027.02.27 — 2027.03.09　（10天）</div>
+        <div class="tl-title">考後緩衝 + 81–120啟動</div>
+        <div class="tl-desc">第二考後立即啟動81–120預讀。距第三考僅49天，節奏要快，不能拖。</div>
+        <div class="tl-tags"><span class="ttag info">1–80 快速回顧</span><span class="ttag e3">81–120 啟動</span></div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot e3"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2027.03.10 — 2027.04.16　（37天）</div>
+        <div class="tl-title e3">第三階段：81–120方 密集衝刺</div>
+        <div class="tl-desc">每天2方密集複習81–120，兩輪完成。每週各20分鐘維持1–40、41–80閃卡。</div>
+        <div class="tl-tags">
+          <span class="ttag e3">初識+鞏固 3/10–3/31</span><span class="ttag e3">衝刺 4/1–4/16</span>
+          <span class="ttag info">1–80 各週維持</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-left"><div class="tl-dot e3"></div></div>
+      <div class="tl-content">
+        <div class="tl-date">2027.04.16</div>
+        <div class="tl-title e3">🏁 第三考</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>📦 三批方劑規劃總覽</h2>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="pcard-head e1">第一批 1–40 <span>10/16考</span></div>
+      <div class="pcard-body">
+        <strong>135天・4輪</strong><br>
+        6/3–7/13 初識口訣<br>7/14–8/22 閃卡默藥<br>
+        8/23–9/21 理解方義<br>9/22–10/16 全程默寫<br><br>
+        考後：每2週快掃維持
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-head e2">第二批 41–80 <span>2/26考</span></div>
+      <div class="pcard-body">
+        <strong>101天・3輪+預讀</strong><br>
+        10/17–11/16 口訣預讀<br>11/17–12/26 正式初識<br>
+        12/27–1/25 深化弱方<br>1/26–2/26 衝刺默寫<br><br>
+        同時：1–40 週維持閃卡
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-head e3">第三批 81–120 <span>4/16考</span></div>
+      <div class="pcard-body">
+        <strong>49天・密集2輪</strong><br>
+        2/27–3/9 啟動預讀<br>3/10–3/31 初識+鞏固<br>
+        4/1–4/16 全程衝刺<br><br>
+        同時：1–80 各週維持閃卡
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>📆 關鍵週計劃</h2>
+  <div class="tip">💡 <strong>日常節奏：</strong>主力批次每天10–15分鐘；維持批次每週安排1次20分鐘閃卡，只過「不熟」和「複習中」的方。遺忘是正常的——第二次看才是真正的記憶。</div>
+  <table class="wtable">
+    <thead><tr><th>時間</th><th>主力任務</th><th>維持任務</th><th>階段</th></tr></thead>
+    <tbody>
+      <tr><td>6/3–7/13</td><td>1–40 初識（每天1方・口訣）</td><td>—</td><td><span class="pb e1">一批初識</span></td></tr>
+      <tr><td>7/14–8/22</td><td>1–40 鞏固（閃卡默藥）</td><td>—</td><td><span class="pb e1">一批鞏固</span></td></tr>
+      <tr><td>8/23–9/21</td><td>1–40 深化（方義+弱方）</td><td>—</td><td><span class="pb e1">一批深化</span></td></tr>
+      <tr><td>9/22–10/16</td><td>1–40 衝刺（全默寫）</td><td>—</td><td><span class="pb e1">一批衝刺</span></td></tr>
+      <tr><td>10/17–11/16</td><td>41–80 口訣預讀</td><td>1–40 雙週閃卡20分</td><td><span class="pb mix">緩衝</span></td></tr>
+      <tr><td>11/17–12/26</td><td>41–80 初識（每天1方）</td><td>1–40 週閃卡20分</td><td><span class="pb e2">二批初識</span></td></tr>
+      <tr><td>12/27–1/25</td><td>41–80 深化（默藥+方義）</td><td>1–40 週閃卡20分</td><td><span class="pb e2">二批深化</span></td></tr>
+      <tr><td>1/26–2/26</td><td>41–80 衝刺（全默寫）</td><td>1–40 週閃卡20分</td><td><span class="pb e2">二批衝刺</span></td></tr>
+      <tr><td>2/27–3/9</td><td>81–120 啟動預讀</td><td>1–80 各快掃一次</td><td><span class="pb mix">緩衝</span></td></tr>
+      <tr><td>3/10–3/31</td><td>81–120 初識（每天2方）</td><td>1–80 各週閃卡各20分</td><td><span class="pb e3">三批初識</span></td></tr>
+      <tr><td>4/1–4/16</td><td>81–120 衝刺（全默寫）</td><td>1–80 各週閃卡各20分</td><td><span class="pb e3">三批衝刺</span></td></tr>
+    </tbody>
+  </table>
+</section>
+</div>
+
+<!-- CARDS -->
+<div id="tab-cards" class="tab-panel">
+  <div class="filter-bar">
+    <input type="text" id="search-input" placeholder="搜尋方名、口訣、藥材…" oninput="renderCards()">
+    <button class="fbtn active" onclick="filterEx('all',this)">全部120</button>
+    <button class="fbtn" onclick="filterEx('e1',this)">🟡 1–40</button>
+    <button class="fbtn" onclick="filterEx('e2',this)">🟢 41–80</button>
+    <button class="fbtn" onclick="filterEx('e3',this)">🟣 81–120</button>
+    <button class="fbtn active" id="st-all-btn" onclick="filterSt('all',this)">全部</button>
+    <button class="fbtn" onclick="filterSt('unfamiliar',this)">不熟</button>
+    <button class="fbtn" onclick="filterSt('reviewing',this)">複習中</button>
+    <button class="fbtn" onclick="filterSt('mastered',this)">已掌握</button>
+    <button class="fbtn" id="htoggle" onclick="toggleHerbs()">顯示藥材</button>
+  </div>
+  <div class="fang-grid" id="fang-grid"></div>
+</div>
+
+<!-- FLASHCARD -->
+<div id="tab-flash" class="tab-panel">
+  <div class="fc-ctrl">
+    <span style="font-size:0.72rem;color:var(--muted)">出題：</span>
+    <button class="fcm active" onclick="setFcMode('name',this)">方名→口訣</button>
+    <button class="fcm" onclick="setFcMode('mnemonic',this)">口訣→藥材</button>
+    <button class="fcm" onclick="setFcMode('herbs',this)">藥材→方名</button>
+    <button class="fcm" onclick="setFcMode('weak',this)">🔴 弱點</button>
+  </div>
+  <div class="fc-filt">
+    <span>範圍：</span>
+    <button class="fbtn active" onclick="setFcExam('all',this)">全部120</button>
+    <button class="fbtn" onclick="setFcExam('e1',this)">1–40</button>
+    <button class="fbtn" onclick="setFcExam('e2',this)">41–80</button>
+    <button class="fbtn" onclick="setFcExam('e3',this)">81–120</button>
+  </div>
+  <div class="fcwrap">
+    <div class="fcard" id="flashcard" onclick="flipCard()">
+      <div class="fql" id="fql">QUESTION</div>
+      <div class="fqq" id="fqq">選擇範圍後按「下一題」</div>
+      <div class="fqa" id="fqa" style="display:none"></div>
+      <div class="fqh" id="fqh" style="display:none"></div>
+      <div class="fqhint" id="fqhint">點擊翻牌 ▽</div>
+    </div>
+  </div>
+  <div class="fcnav">
+    <button onclick="prevFc()">← 上一題</button>
+    <span class="fccnt" id="fccnt">— / —</span>
+    <button onclick="nextFc()">下一題 →</button>
+  </div>
+  <div class="mrow">
+    <button class="mbtn mbu" onclick="markFc('unfamiliar')">🔴 不熟</button>
+    <button class="mbtn mbr" onclick="markFc('reviewing')">🟡 複習中</button>
+    <button class="mbtn mbm" onclick="markFc('mastered')">🟢 已掌握</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div id="tab-stats" class="tab-panel">
+  <section>
+    <h2>📊 整體掌握度</h2>
+    <div class="stgrid" id="stgrid"></div>
+  </section>
+  <section>
+    <h2>🎯 各考試進度</h2>
+    <div id="exprog"></div>
+  </section>
+  <section>
+    <h2>📈 各方劑狀態（1–120）</h2>
+    <div class="fbars" id="fbars"></div>
+  </section>
+</div>
+
+</div>
+<script>
+const FANG=[
+  {id:1,ex:'e1',name:"乙字湯",mn:"歸柴黃大草升",h:"當歸、柴胡、黃芩、大黃、甘草、升麻"},
+  {id:2,ex:'e1',name:"一貫煎",mn:"一貫歸川，殺狗賣地",h:"沙參、麥冬、當歸、生地、枸杞、川楝子"},
+  {id:3,ex:'e1',name:"二陳湯",mn:"陳夏領草",h:"半夏、陳皮、茯苓、甘草"},
+  {id:4,ex:'e1',name:"九味羌活湯",mn:"九味地芷蒼辛芩甘活防芎+薑蔥",h:"羌活、防風、蒼朮、細辛、川芎、白芷、生地、黃芩、甘草、生薑、蔥白"},
+  {id:5,ex:'e1',name:"八正散",mn:"黃梔萹屈麥燈通滑草車",h:"木通、瞿麥、萹蓄、車前子、滑石、燈芯草、甘草梢、梔子、大黃"},
+  {id:6,ex:'e1',name:"十全大補湯",mn:"人築你吵，歸公掃地+黃耆肉桂薑棗",h:"肉桂、黃耆、人參、白朮、茯苓、甘草、當歸、熟地、白芍、川芎、生薑、大棗"},
+  {id:7,ex:'e1',name:"人參養榮湯",mn:"四君四物-川芎+五味遠志陳皮桂心",h:"人參、白朮、茯苓、甘草、當歸、白芍、熟地、黃耆、桂心、五味子、陳皮、遠志、薑、棗"},
+  {id:8,ex:'e1',name:"八味帶下方",mn:"土歸芎木，茯陳金花大",h:"土茯苓、當歸、川芎、木通、茯苓、陳皮、金銀花、大黃"},
+  {id:9,ex:'e1',name:"七寶美髯丹",mn:"烏龜枸菟牛苓脂",h:"何首烏、白茯苓、牛膝、當歸、枸杞、菟絲子、破故紙"},
+  {id:10,ex:'e1',name:"三黃瀉心湯",mn:"大黃黃芩黃連",h:"大黃、黃芩、黃連"},
+  {id:11,ex:'e1',name:"小柴胡湯",mn:"薑棗芩柴草夏人",h:"柴胡、半夏、人參、甘草、黃芩、薑、棗"},
+  {id:12,ex:'e1',name:"小青龍湯",mn:"跪下要薑五乾媽操心",h:"麻黃、桂枝、白芍、甘草、乾薑、半夏、五味子、細辛"},
+  {id:13,ex:'e1',name:"小承氣湯",mn:"大猴子",h:"生大黃、厚朴、枳實"},
+  {id:14,ex:'e1',name:"大柴胡湯",mn:"芩黃枳藥半胡薑棗",h:"柴胡、半夏、大黃、黃芩、白芍、枳實、薑、棗"},
+  {id:15,ex:'e1',name:"大青龍湯",mn:"麻黃湯+石膏薑棗",h:"麻黃、桂枝、炙甘草、杏仁、石膏、薑、棗"},
+  {id:16,ex:'e1',name:"大承氣湯",mn:"大忙時候",h:"大黃、厚朴、枳實、芒硝"},
+  {id:17,ex:'e1',name:"川芎茶調散",mn:"草芎辛芥芷，羌風荷茶",h:"川芎、白芷、甘草、羌活、荊芥、細辛、防風、薄荷、細茶"},
+  {id:18,ex:'e1',name:"小建中湯",mn:"大芍草，糖薑汁",h:"桂枝、白芍、甘草、生薑、大棗、飴糖"},
+  {id:19,ex:'e1',name:"小活絡丹",mn:"活絡二烏沒乳難隆",h:"川烏、草烏、天南星、地龍、乳香、沒藥"},
+  {id:20,ex:'e1',name:"五苓散",mn:"臨櫃澤白豬",h:"桂枝、茯苓、豬苓、白朮、澤瀉"},
+  {id:21,ex:'e1',name:"五皮飲",mn:"伏大將陳桑",h:"茯苓皮、大腹皮、生薑皮、陳皮、桑白皮"},
+  {id:22,ex:'e1',name:"六味地黃丸",mn:"漁夫單要補熟蟹",h:"熟地、山藥、山茱萸、茯苓、澤瀉、丹皮"},
+  {id:23,ex:'e1',name:"止嗽散",mn:"陳梗借錢百草園",h:"桔梗、荊芥、紫苑、百部、白前、甘草、陳皮"},
+  {id:24,ex:'e1',name:"天王補心丹",mn:"生地梗丹玄志苓，參麥當天柏子酸",h:"生地黃、酸棗仁、柏子仁、麥冬、天冬、五味子、當歸、遠志、丹參、玄參、茯苓、桔梗、人參"},
+  {id:25,ex:'e1',name:"少腹逐淤湯",mn:"回家延沒歸宮，貴少仆靈",h:"小茴香、乾薑、延胡索、沒藥、當歸、川芎、肉桂、赤芍、蒲黃、五靈脂"},
+  {id:26,ex:'e1',name:"天麻鉤藤飲",mn:"天麻鉤藤夜交決寄，茯神芩牛仲梔益",h:"天麻、鉤藤、石決明、梔子、牛膝、杜仲、黃芩、夜交藤、益母草、桑寄生、茯神"},
+  {id:27,ex:'e1',name:"四物湯",mn:"歸公掃地",h:"當歸、熟地、白芍、川芎"},
+  {id:28,ex:'e1',name:"四逆散",mn:"只燒柴草",h:"柴胡、白芍、枳實、炙甘草"},
+  {id:29,ex:'e1',name:"四逆湯",mn:"生父薑幹",h:"生附子、乾薑、甘草"},
+  {id:30,ex:'e1',name:"四君子湯",mn:"人築你吵+薑棗",h:"人參、白朮、茯苓、甘草、生薑、大棗"},
+  {id:31,ex:'e1',name:"平胃散",mn:"厚煮草皮+薑棗",h:"蒼朮、厚朴、陳皮、甘草、生薑、大棗"},
+  {id:32,ex:'e1',name:"甘麥大棗湯",mn:"甘麥大棗",h:"小麥、炙甘草、大棗"},
+  {id:33,ex:'e1',name:"甘露飲",mn:"天麥生熟石茵芩殼枇甘",h:"天冬、麥冬、生地、熟地、石斛、茵陳、黃芩、枳殼、枇杷葉、甘草"},
+  {id:34,ex:'e1',name:"甘露消毒丹",mn:"芩香連母石射陳，菖蒲薄蔻通",h:"滑石、茵陳蒿、黃芩、石菖蒲、木通、川貝母、射干、連翹、薄荷、白蔻仁、藿香"},
+  {id:35,ex:'e1',name:"加味逍遙散",mn:"丹梔逍遙朮薑荷，芍苓柴當甘",h:"丹皮、梔子、柴胡、當歸、白朮、白芍、茯苓、甘草、薄荷、煨薑"},
+  {id:36,ex:'e1',name:"生化湯",mn:"將干逃歸川",h:"當歸、川芎、桃仁、黑薑、炙甘草"},
+  {id:37,ex:'e1',name:"玉女煎",mn:"地洞搞母牛",h:"生石膏、熟地、麥冬、知母、牛膝"},
+  {id:38,ex:'e1',name:"玉屏風散",mn:"房主棄屏風",h:"黃耆、白朮、防風"},
+  {id:39,ex:'e1',name:"半夏朮麻湯",mn:"陳半茯白天蒼薑麥麴耆參澤柏",h:"陳皮、半夏、茯苓、白朮、天麻、蒼朮、乾薑、麥芽、神麴、黃耆、人參、澤瀉、黃柏"},
+  {id:40,ex:'e1',name:"半夏厚朴湯",mn:"夏厚薑茯蘇",h:"半夏、厚朴、茯苓、蘇葉、生薑"},
+  {id:41,ex:'e2',name:"半夏瀉心湯",mn:"江大人今夏草簾",h:"半夏、黃連、黃芩、乾薑、人參、甘草、大棗"},
+  {id:42,ex:'e2',name:"生脈散",mn:"人無脈",h:"人參、麥冬、五味子"},
+  {id:43,ex:'e2',name:"左歸丸",mn:"茱地山，鹿狗龜兔牛",h:"熟地、山藥、枸杞、山萸肉、牛膝、菟絲子、鹿角膠、龜板"},
+  {id:44,ex:'e2',name:"安中散",mn:"延胡殺良將，牡蠣甘願回歸",h:"甘草、延胡索、良薑、砂仁、小茴香、肉桂、牡蠣"},
+  {id:45,ex:'e2',name:"百合固金湯",mn:"弟弟賣草藥，百元皆歸母",h:"生地、熟地、麥冬、貝母、百合、當歸、白芍、甘草、玄參、桔梗"},
+  {id:46,ex:'e2',name:"血府逐瘀湯",mn:"俏桃紅穿柴草要當牛耕地",h:"桃仁、紅花、當歸、生地、赤芍、川芎、柴胡、枳殼、甘草、桔梗、牛膝"},
+  {id:47,ex:'e2',name:"竹葉石膏湯",mn:"石竹人夏草米",h:"竹葉、石膏、人參、麥冬、半夏、粳米、甘草"},
+  {id:48,ex:'e2',name:"右歸丸",mn:"有鬼！育狗鹿菟中，當地要富貴",h:"熟地、山藥、枸杞、杜仲、山茱萸、肉桂、熟附子、菟絲子、鹿角膠、當歸"},
+  {id:49,ex:'e2',name:"辛夷散",mn:"高升細心，白川防風通甘",h:"辛夷、升麻、甘草、白芷、蒿本、防風、川芎、細辛、木通、細茶葉"},
+  {id:50,ex:'e2',name:"辛夷清肺飲",mn:"石知黃梔，枇百麥升甘",h:"辛夷、升麻、甘草、梔子、黃芩、石膏、知母、百合、麥門冬、枇杷葉"},
+  {id:51,ex:'e2',name:"杞菊地黃丸",mn:"六味地黃加杞菊",h:"熟地、山藥、山茱萸、茯苓、澤瀉、丹皮、枸杞、菊花"},
+  {id:52,ex:'e2',name:"完帶湯",mn:"草人柴陳朮芥車藥蒼芍",h:"白朮、山藥、人參、白芍、車前子、蒼朮、甘草、陳皮、荊芥穗、柴胡"},
+  {id:53,ex:'e2',name:"防己黃耆湯",mn:"草房黃找白漿",h:"防己、黃耆、白朮、甘草、生薑、大棗"},
+  {id:54,ex:'e2',name:"吳茱萸湯",mn:"吳人薑大",h:"吳茱萸、人參、生薑、大棗"},
+  {id:55,ex:'e2',name:"杏蘇散",mn:"蘇杏姐將找陳夏領草支前",h:"杏仁、前胡、茯苓、半夏、紫蘇葉、枳殼、桔梗、陳皮、甘草、生薑、大棗"},
+  {id:56,ex:'e2',name:"沙參麥冬飲",mn:"沙麥見花，桑葉扁了玉竹甘",h:"沙參、麥冬、玉竹、桑葉、天花粉、扁豆、甘草"},
+  {id:57,ex:'e2',name:"金鎖固精丸",mn:"龍母欠臉圓",h:"沙苑、芡實、蓮鬚、龍骨、牡蠣、蓮子"},
+  {id:58,ex:'e2',name:"羌活勝濕湯",mn:"高兄瘋蠻搶活幹",h:"羌活、獨活、蒿本、防風、蔓荊子、川芎、甘草"},
+  {id:59,ex:'e2',name:"定喘湯",mn:"桑叔炒白果黃，杏拌麻花",h:"白果肉、麻黃、蘇子、杏仁、款冬花、桑白皮、黃芩、半夏、甘草"},
+  {id:60,ex:'e2',name:"炙甘草湯",mn:"復賣！叫人找草地賣芝麻醬",h:"炙甘草、人參、生地、麥冬、桂枝、火麻仁、生薑、大棗、阿膠"},
+  {id:61,ex:'e2',name:"胃苓湯",mn:"平胃散+五苓散",h:"蒼朮、厚朴、陳皮、甘草、白朮、茯苓、豬苓、澤瀉、肉桂、生薑、大棗"},
+  {id:62,ex:'e2',name:"香砂六君子湯",mn:"人築你吵+陳皮半夏木香砂仁",h:"木香、砂仁、人參、半夏、白朮、茯苓、陳皮、甘草"},
+  {id:63,ex:'e2',name:"保和丸",mn:"神父下山敲沉來",h:"山楂、神麴、半夏、茯苓、連翹、陳皮、萊菔子"},
+  {id:64,ex:'e2',name:"保產無憂方",mn:"姜太公歸芎起義，驚恐吐貝殼，厚少乾",h:"厚朴、艾葉、當歸、川芎、黃耆、荊芥、川貝母、菟絲子、羌活、甘草、枳殼、白芍、生薑"},
+  {id:65,ex:'e2',name:"苓桂朮甘湯",mn:"苓桂朮甘",h:"茯苓、桂枝、白朮、甘草"},
+  {id:66,ex:'e2',name:"桂枝湯",mn:"桂芍草薑棗",h:"桂枝、白芍、炙甘草、大棗、生薑"},
+  {id:67,ex:'e2',name:"桂枝茯苓丸",mn:"貴人服丹藥",h:"桂枝、茯苓、牡丹皮、桃仁、赤芍"},
+  {id:68,ex:'e2',name:"桂枝芍藥知母湯",mn:"桂芍知道，麻煩父子，防止白乾薑",h:"桂枝、芍藥、知母、白朮、防風、甘草、麻黃、附子、生薑"},
+  {id:69,ex:'e2',name:"茵陳蒿湯",mn:"茵陳治黃",h:"茵陳蒿、山梔子、大黃"},
+  {id:70,ex:'e2',name:"荊防敗毒散",mn:"合將搶二胡，川公獨雞硬，只可幹夫人+荊防",h:"荊芥穗、防風、羌活、獨活、前胡、柴胡、枳殼、桔梗、赤茯苓、川芎、甘草"},
+  {id:71,ex:'e2',name:"桑菊飲",mn:"桑菊薄杏，草根更翹",h:"桑葉、菊花、連翹、薄荷、甘草、杏仁、桔梗、蘆根"},
+  {id:72,ex:'e2',name:"消風散",mn:"謹防饞牛通倉庫，十畝草地歸胡媽",h:"荊芥、防風、當歸、生地、苦參、蒼朮、蟬蛻、胡麻仁、牛旁子、知母、石膏、甘草、木通"},
+  {id:73,ex:'e2',name:"益氣聰明湯",mn:"聰明人，參耆升葛，蔓京白柏甘",h:"黃耆、人參、葛根、蔓荊子、白芍、黃柏、升麻、甘草"},
+  {id:74,ex:'e2',name:"真武湯",mn:"珠江富少林",h:"熟附子、茯苓、白芍、白朮、生薑"},
+  {id:75,ex:'e2',name:"真人活命飲",mn:"真人拿金銀，防止白鬼陳皮，早穿乳沒貝花甘",h:"金銀花、陳皮、當歸尾、防風、白芷、甘草、貝母、天花粉、乳香、沒藥、皂角刺、穿山甲"},
+  {id:76,ex:'e2',name:"秦艽鱉甲散",mn:"烏龜叫鱉母，清湖底",h:"秦艽、鱉甲、柴胡、地骨皮、知母、當歸、青蒿、烏梅"},
+  {id:77,ex:'e2',name:"柴胡加龍牡湯",mn:"柴夫驚找伴，龍牡鉛大黃，參苓桂芩",h:"柴胡、半夏、茯苓、桂枝、黃芩、大棗、人參、龍骨、牡蠣、大黃、生薑、鉛丹"},
+  {id:78,ex:'e2',name:"柴葛解肌湯",mn:"柴葛解肌白芷搶，勤搞雞乾",h:"柴胡、葛根、黃芩、白芍、白芷、羌活、桔梗、石膏、甘草、生薑、大棗"},
+  {id:79,ex:'e2',name:"柴胡疏肝湯",mn:"枳殼陳附川芍柴草",h:"柴胡、陳皮、川芎、香附、枳殼、白芍、甘草"},
+  {id:80,ex:'e2',name:"桑螵蛸散",mn:"志甲人菖骨苓螵當",h:"桑螵蛸、遠志、石菖蒲、生龍骨、人參、茯苓、當歸、龜板"},
+  {id:81,ex:'e3',name:"橘皮竹茹湯",mn:"江大人煮皮草",h:"橘皮、竹茹、人參、甘草、生薑、大棗"},
+  {id:82,ex:'e3',name:"涼膈散",mn:"兩個蜜柑請主教，知大勃翹",h:"連翹、竹葉、薄荷、黃芩、甘草、梔子、大黃、芒硝"},
+  {id:83,ex:'e3',name:"麻黃湯",mn:"乾媽貴姓",h:"麻黃、桂枝、杏仁、炙甘草"},
+  {id:84,ex:'e3',name:"麻杏甘石湯",mn:"麻杏甘石",h:"麻黃、杏仁、炙甘草、石膏"},
+  {id:85,ex:'e3',name:"理中湯",mn:"人幹白幹",h:"人參、白朮、炙甘草、乾薑"},
+  {id:86,ex:'e3',name:"清心蓮子飲",mn:"蓮子心中茯人參，麥地芩草車",h:"石蓮子、麥冬、茯苓、人參、車前子、黃芩、黃耆、地骨皮、甘草"},
+  {id:87,ex:'e3',name:"旋覆代赭石湯",mn:"將干瞎找戴花人",h:"旋覆花、代赭石、甘草、大棗、人參、生薑、半夏"},
+  {id:88,ex:'e3',name:"清胃湯",mn:"丹地歸連升",h:"黃連、牡丹皮、生地、當歸、升麻"},
+  {id:89,ex:'e3',name:"清燥救肺湯",mn:"失業人胡麻仁，賣芭蕉炒杏仁",h:"石膏、桑葉、人參、胡麻仁、阿膠、麥冬、杏仁、枇杷葉、甘草"},
+  {id:90,ex:'e3',name:"參苓白朮散",mn:"棗陳參茯白朮草，薏仁桔蓮藥砂扁",h:"人參、茯苓、白朮、甘草、山藥、蓮肉、桔梗、薏苡仁、白扁豆、砂仁、大棗"},
+  {id:91,ex:'e3',name:"麻子仁丸",mn:"百大猴子，掃興馬子瘋",h:"麻子仁、白芍、枳實、厚朴、杏仁、大黃"},
+  {id:92,ex:'e3',name:"清上防風湯",mn:"防翹荊芷芩川薄，連梔殼草桔",h:"防風、連翹、荊芥、白芷、黃芩、川芎、薄荷、黃連、梔子、枳殼、甘草、桔梗"},
+  {id:93,ex:'e3',name:"黃連解毒湯",mn:"柏芝練琴",h:"黃連、黃芩、黃柏、梔子"},
+  {id:94,ex:'e3',name:"溫膽湯",mn:"珠江下令早食柑橘",h:"陳皮、半夏、茯苓、甘草、竹茹、枳實、生薑、大棗"},
+  {id:95,ex:'e3',name:"溫經湯",mn:"熊皮貴，無人要，冬將夏，草當澆",h:"當歸、川芎、白芍、吳茱萸、人參、桂枝、阿膠、牡丹皮、生薑、甘草、半夏、麥冬"},
+  {id:96,ex:'e3',name:"溫清湯",mn:"四物湯加黃連解毒湯，再添生地",h:"熟地、白芍、當歸、川芎、黃芩、黃連、黃柏、梔子、生地"},
+  {id:97,ex:'e3',name:"普濟消毒飲",mn:"媽媽和陳唬爛幹，旋即連連清蠶牛",h:"黃芩、黃連、連翹、玄參、甘草、桔梗、升麻、柴胡、馬勃、陳皮、薄荷、僵蠶、牛蒡子、板藍根"},
+  {id:98,ex:'e3',name:"補中益氣湯",mn:"陳擋住人妻身材幹",h:"黃耆、人參、白朮、當歸、陳皮、柴胡、升麻、甘草、生薑、大棗"},
+  {id:99,ex:'e3',name:"補陽還五湯",mn:"當地兇人持紅旗",h:"黃耆、當歸尾、赤芍、地龍、川芎、桃仁、紅花"},
+  {id:100,ex:'e3',name:"越鞠丸",mn:"父子唱川曲",h:"香附、蒼朮、梔子、川芎、神麴"},
+  {id:101,ex:'e3',name:"散腫潰堅湯",mn:"三黃知母膽大昆，柴升葛翹花梗草，三稜莪朮歸芍尾",h:"黃芩、知母、黃柏、桔梗、黃連、花粉、葛根、龍膽草、昆布、柴胡、升麻、連翹、甘草、三稜、莪朮、歸尾、白芍"},
+  {id:102,ex:'e3',name:"疏經活血湯",mn:"歸地芎芍桃牛靈，防防龍羌芷，蒼茯陳薑草",h:"當歸、生地、蒼朮、川芎、桃仁、茯苓、芍藥、牛膝、威靈仙、防己、羌活、防風、龍膽草、生薑、陳皮、白芷、甘草"},
+  {id:103,ex:'e3',name:"當歸拈痛湯",mn:"陳媽葛母豬甘苦，租槍防身當擒白蟹",h:"當歸、葛根、防風、升麻、澤瀉、豬苓、茵陳、黃芩、蒼朮、苦參、知母、甘草、羌活、白朮、人參"},
+  {id:104,ex:'e3',name:"當歸芍藥散",mn:"歸芍芎，苓朮澤",h:"當歸、芍藥、川芎、茯苓、白朮、澤瀉"},
+  {id:105,ex:'e3',name:"葛根湯",mn:"桂枝湯加葛根麻黃",h:"葛根、麻黃、桂枝、芍藥、炙甘草、大棗、生薑"},
+  {id:106,ex:'e3',name:"葛根芩連湯",mn:"葛芩連草",h:"葛根、黃芩、黃連、甘草"},
+  {id:107,ex:'e3',name:"銀翹散",mn:"竹豉荊牛荷銀，草根梗翹",h:"金銀花、連翹、竹葉、荊芥、牛蒡子、淡豆豉、薄荷葉、蘆根、桔梗、甘草"},
+  {id:108,ex:'e3',name:"酸棗仁湯",mn:"心酸找人甘之芎林",h:"酸棗仁、知母、茯苓、川芎、甘草"},
+  {id:109,ex:'e3',name:"蒼耳散",mn:"蒼耳辛夷芷薄，蔥茶",h:"蒼耳子、辛夷、白芷、薄荷、蔥白、細茶"},
+  {id:110,ex:'e3',name:"膈下逐瘀湯",mn:"五靈歸芍芎丹烏，延草香桃紅枳",h:"五靈脂、當歸、赤芍、川芎、丹皮、烏藥、延胡索、甘草、香附、桃仁、紅花、枳殼"},
+  {id:111,ex:'e3',name:"獨活寄生湯",mn:"情人細心獨寄貴藥，杜兄放牛歸伏草地",h:"獨活、桑寄生、秦艽、防風、細辛、川芎、當歸、芍藥、熟地、桂心、茯苓、杜仲、川牛膝、人參、甘草"},
+  {id:112,ex:'e3',name:"龍膽瀉肝湯",mn:"龍膽瀉甘通車，歸弟才知勤",h:"龍膽草、梔子、黃芩、柴胡、生地、澤瀉、當歸、木通、甘草、車前子"},
+  {id:113,ex:'e3',name:"豬苓湯",mn:"謝苓苓滑跤",h:"豬苓、茯苓、滑石、澤瀉、阿膠"},
+  {id:114,ex:'e3',name:"濟生腎氣丸",mn:"六味地黃加附桂，車前牛膝濟生醫",h:"熟地、山茱萸、山藥、牡丹皮、茯苓、澤瀉、肉桂、附子、車前子、牛膝"},
+  {id:115,ex:'e3',name:"薏苡仁湯",mn:"薏苡當蒼麻桂芍，草薑",h:"薏苡仁、當歸、蒼朮、麻黃、桂枝、白芍、炙甘草、生薑"},
+  {id:116,ex:'e3',name:"還少丹",mn:"山牛茯茱楮杜五，巴蓉遠志茴石熟，杞棗",h:"山藥、牛膝、茯苓、山茱萸、楮實子、杜仲、五味子、巴戟天、肉蓯蓉、遠志、小茴香、石菖蒲、熟地、枸杞子、大棗"},
+  {id:117,ex:'e3',name:"歸脾湯",mn:"大龍草原牧豬，奇人伏算將歸",h:"黃耆、當歸、人參、白朮、茯苓、酸棗仁、龍眼肉、遠志、炙甘草、木香、生薑、大棗"},
+  {id:118,ex:'e3',name:"藿香正氣散",mn:"陳姐服下腹皮草後，想找江蘇白蜘蛛",h:"藿香、半夏、白朮、茯苓、厚朴、陳皮、大棗、生薑、桔梗、大腹皮、白芷、炙甘草、紫蘇"},
+  {id:119,ex:'e3',name:"蘇子降氣湯",mn:"蘇子葉找肉鋪，盛夏歸草湖",h:"蘇子、半夏、陳皮、厚朴、前胡、當歸、肉桂、生薑、甘草、大棗"},
+  {id:120,ex:'e3',name:"蠲痺湯",mn:"耆歸赤羌防薑草，薑大棗",h:"黃耆、當歸、赤芍、羌活、防風、薑黃、甘草、生薑、大棗"},
+];
+let statusMap={};
+let showH=false;
+let cExam='all';let cSt='all';
+let fcMode='name';let fcExam='all';
+let fcQ=[];let fcI=0;let fcFlipped=false;
+try{const s=localStorage.getItem('f120s');if(s)statusMap=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem('f120s',JSON.stringify(statusMap));}catch(e){}}
+function showTab(n,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');
+  if(n==='cards')renderCards();if(n==='stats')renderStats();if(n==='flash')initFc();
+}
+function renderCards(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const g=document.getElementById('fang-grid');
+  const fl=FANG.filter(f=>{
+    const ms=!q||f.name.includes(q)||f.h.includes(q)||f.mn.includes(q);
+    const me=cExam==='all'||f.ex===cExam;
+    const mst=cSt==='all'||(statusMap[f.id]||'none')===cSt;
+    return ms&&me&&mst;
+  });
+  g.innerHTML=fl.map(f=>{
+    const st=statusMap[f.id]||'none';
+    return`<div class="fc2 ${st!=='none'?st:''}">
+      <div class="fc2-head">
+        <div class="fc2-name">${f.name}</div>
+        <div class="fc2-meta"><span class="fc2-num">#${String(f.id).padStart(3,'0')}</span><span class="edot ${f.ex}"></span></div>
+      </div>
+      <div class="fc2-body">
+        <div class="mlabel">口訣</div><div class="mnem">${f.mn}</div>
+        <div class="mlabel">藥材</div>
+        <div class="herbtxt ${showH?'':'hidden'}">${f.h}</div>
+        ${!showH?'<div style="font-size:0.63rem;color:var(--border2)">點「顯示藥材」展開</div>':''}
+      </div>
+      <div class="srow">
+        <button class="sbtn ${st==='unfamiliar'?'au':''}" onclick="setSt(${f.id},'unfamiliar',event)">🔴 不熟</button>
+        <button class="sbtn ${st==='reviewing'?'ar':''}" onclick="setSt(${f.id},'reviewing',event)">🟡 複習中</button>
+        <button class="sbtn ${st==='mastered'?'am':''}" onclick="setSt(${f.id},'mastered',event)">🟢 掌握</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function setSt(id,st,e){e.stopPropagation();if(statusMap[id]===st)delete statusMap[id];else statusMap[id]=st;save();renderCards();}
+function filterEx(ex,btn){
+  cExam=ex;
+  const cls={all:'active',e1:'ae1',e2:'ae2',e3:'ae3'};
+  btn.parentElement.querySelectorAll('.fbtn').forEach(b=>{
+    b.classList.remove('active','ae1','ae2','ae3');
+  });
+  btn.classList.add(cls[ex]||'active');
+  renderCards();
+}
+function filterSt(st,btn){
+  cSt=st;
+  [].forEach.call(document.querySelectorAll('.filter-bar .fbtn'),b=>{
+    if(['全部','不熟','複習中','已掌握'].includes(b.textContent))b.classList.remove('active');
+  });
+  btn.classList.add('active');renderCards();
+}
+function toggleHerbs(){showH=!showH;document.getElementById('htoggle').textContent=showH?'隱藏藥材':'顯示藥材';renderCards();}
+function setFcMode(m,btn){fcMode=m;document.querySelectorAll('.fcm').forEach(b=>b.classList.remove('active'));btn.classList.add('active');initFc();}
+function setFcExam(ex,btn){fcExam=ex;document.querySelectorAll('.fc-filt .fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');initFc();}
+function initFc(){
+  let pool=fcExam==='all'?FANG:FANG.filter(f=>f.ex===fcExam);
+  if(fcMode==='weak'){
+    let w=pool.filter(f=>statusMap[f.id]==='unfamiliar');
+    if(!w.length)w=pool.filter(f=>statusMap[f.id]!=='mastered');
+    fcQ=[...w];
+  }else fcQ=[...pool];
+  for(let i=fcQ.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcQ[i],fcQ[j]]=[fcQ[j],fcQ[i]];}
+  fcI=0;fcFlipped=false;renderFc();
+}
+function renderFc(){
+  if(!fcQ.length){document.getElementById('fqq').textContent='沒有符合的方劑';document.getElementById('fccnt').textContent='0/0';return;}
+  const f=fcQ[fcI];
+  document.getElementById('fccnt').textContent=`${fcI+1}/${fcQ.length}`;
+  document.getElementById('fqa').style.display='none';document.getElementById('fqh').style.display='none';
+  document.getElementById('fqhint').style.display='block';fcFlipped=false;
+  let label,q;
+  if(fcMode==='name'||fcMode==='weak'){label='方名 → 口訣';q=f.name;}
+  else if(fcMode==='mnemonic'){label='口訣 → 藥材';q=f.mn;}
+  else{label='藥材 → 方名';q=f.h.split('、').slice(0,4).join('、')+'…';}
+  document.getElementById('fql').textContent=label;document.getElementById('fqq').textContent=q;
+}
+function flipCard(){
+  if(!fcQ.length)return;const f=fcQ[fcI];fcFlipped=!fcFlipped;
+  const a=document.getElementById('fqa');const h=document.getElementById('fqh');const hint=document.getElementById('fqhint');
+  if(fcFlipped){
+    hint.style.display='none';
+    if(fcMode==='name'||fcMode==='weak'){a.textContent=f.mn;a.style.display='block';h.textContent=f.h;h.style.display='block';}
+    else if(fcMode==='mnemonic'){a.textContent=f.h;a.style.display='block';}
+    else{a.textContent=f.name;a.style.display='block';h.textContent=f.h;h.style.display='block';}
+  }else{a.style.display='none';h.style.display='none';hint.style.display='block';}
+}
+function nextFc(){if(!fcQ.length)return;fcI=(fcI+1)%fcQ.length;renderFc();}
+function prevFc(){if(!fcQ.length)return;fcI=(fcI-1+fcQ.length)%fcQ.length;renderFc();}
+function markFc(st){if(!fcQ.length)return;statusMap[fcQ[fcI].id]=st;save();nextFc();}
+function renderStats(){
+  const tot=FANG.length;
+  const m=FANG.filter(f=>statusMap[f.id]==='mastered').length;
+  const r=FANG.filter(f=>statusMap[f.id]==='reviewing').length;
+  const u=FANG.filter(f=>statusMap[f.id]==='unfamiliar').length;
+  document.getElementById('stgrid').innerHTML=`
+    <div class="stcard"><div class="stnum" style="color:var(--gold2)">${tot}</div><div class="stlbl">總方數</div></div>
+    <div class="stcard"><div class="stnum" style="color:var(--green2)">${m}</div><div class="stlbl">已掌握 ${Math.round(m/tot*100)}%</div></div>
+    <div class="stcard"><div class="stnum" style="color:var(--gold2)">${r}</div><div class="stlbl">複習中</div></div>
+    <div class="stcard"><div class="stnum" style="color:var(--red2)">${u}</div><div class="stlbl">不熟</div></div>
+    <div class="stcard"><div class="stnum" style="color:var(--muted)">${tot-m-r-u}</div><div class="stlbl">未標記</div></div>`;
+  const exams=[{k:'e1',l:'第一批 1–40',c:'e1'},{k:'e2',l:'第二批 41–80',c:'e2'},{k:'e3',l:'第三批 81–120',c:'e3'}];
+  document.getElementById('exprog').innerHTML=exams.map(ex=>{
+    const p=FANG.filter(f=>f.ex===ex.k);
+    const pm=p.filter(f=>statusMap[f.id]==='mastered').length;
+    const pct=Math.round(pm/p.length*100);
+    return`<div class="eprow"><div class="eplbl">${ex.l}</div><div class="eptr"><div class="epf ${ex.c}" style="width:${pct}%"></div></div><div class="eppct">${pm}/${p.length}</div></div>`;
+  }).join('');
+  document.getElementById('fbars').innerHTML=FANG.map(f=>{
+    const st=statusMap[f.id]||'none';
+    const col=st==='mastered'?'var(--green)':st==='reviewing'?'var(--gold)':st==='unfamiliar'?'var(--red)':'var(--border)';
+    const pct=st==='mastered'?100:st==='reviewing'?55:st==='unfamiliar'?20:0;
+    return`<div class="brow"><div class="blbl">${f.id}. ${f.name}</div><div class="btr"><div class="bfl" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join('');
+}
+renderCards();initFc();
+</script>
+</body>
+</html>
