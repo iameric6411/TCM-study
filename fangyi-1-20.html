@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方義分析 1–20 · 中醫國考複習站</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+:root{
+  --bg:#0f0e0c;--surface:#1a1814;--surface2:#221f1a;--surface3:#2a2620;
+  --border:#2e2a24;--border2:#3d3830;
+  --text:#e8dfc8;--muted:#7a7060;--muted2:#9a8e78;
+  --gold:#c9a84c;--gold2:#e8c870;
+  --red:#c45c3a;--red2:#e07050;
+  --blue:#4a7fa8;--blue2:#6aafd8;
+  --green:#4a8a5a;--green2:#6ab87a;
+  --purple:#7a5ca8;--purple2:#b09ae8;
+  --teal:#3a8a88;--teal2:#6ac8c6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:linear-gradient(135deg,#1a1510,#0f0e0c);border-bottom:1px solid var(--border);padding:1.5rem 2rem;position:relative;overflow:hidden;}
+header::before{content:'方義';font-family:'Noto Serif TC',serif;font-size:8rem;font-weight:900;color:rgba(201,168,76,0.04);position:absolute;right:-0.5rem;top:-1.5rem;line-height:1;pointer-events:none;}
+.h-back{font-size:0.67rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;display:inline-flex;align-items:center;gap:0.25rem;margin-bottom:0.5rem;}
+.h-back:hover{color:var(--text);}
+header h1{font-family:'Noto Serif TC',serif;font-size:1.35rem;font-weight:700;color:var(--gold2);letter-spacing:0.08em;margin-bottom:0.2rem;}
+.h-sub{font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;}
+.h-nav{display:flex;gap:0.5rem;margin-top:0.8rem;flex-wrap:wrap;align-items:center;}
+.hn{padding:0.28rem 0.75rem;border-radius:4px;font-size:0.68rem;text-decoration:none;font-weight:500;letter-spacing:0.04em;border:1px solid;transition:opacity 0.2s;cursor:pointer;}
+.hn:hover{opacity:0.75;}
+.hn-cur{background:rgba(201,168,76,0.18);border-color:rgba(201,168,76,0.45);color:var(--gold2);cursor:default;}
+.hn-e1{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.3);color:var(--gold2);}
+.hn-e2{background:rgba(74,138,90,0.1);border-color:rgba(74,138,90,0.3);color:var(--green2);}
+.hn-dim{background:rgba(255,255,255,0.03);border-color:var(--border2);color:var(--muted2);}
+.layout{display:flex;}
+.sidebar{width:192px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:0.8rem 0;}
+.sb-hd{font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;padding:0 0.85rem 0.5rem;border-bottom:1px solid var(--border);margin-bottom:0.4rem;}
+.sb-search{margin:0.4rem 0.6rem 0.5rem;position:relative;}
+.sb-search input{width:100%;padding:0.28rem 0.5rem;border:1px solid var(--border2);border-radius:4px;background:var(--surface2);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-size:0.68rem;outline:none;}
+.sb-search input:focus{border-color:var(--gold);}
+.sb-a{display:flex;align-items:center;gap:0.4rem;padding:0.28rem 0.85rem;font-size:0.7rem;color:var(--muted2);text-decoration:none;transition:all 0.15s;border-left:2px solid transparent;}
+.sb-a:hover{color:var(--text);background:rgba(255,255,255,0.02);}
+.sb-a.on{color:var(--gold2);border-left-color:var(--gold);background:rgba(201,168,76,0.04);}
+.sb-a.hidden{display:none;}
+.sb-n{font-size:0.58rem;color:var(--muted);min-width:20px;}
+.content{flex:1;padding:1.4rem 1.7rem 3rem;max-width:860px;}
+.search-bar{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.1rem;padding:0.7rem 0.9rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;}
+.search-bar input{flex:1;background:none;border:none;color:var(--text);font-family:'Noto Sans TC',sans-serif;font-size:0.78rem;outline:none;}
+.search-bar input::placeholder{color:var(--muted);}
+.search-label{font-size:0.65rem;color:var(--muted);white-space:nowrap;}
+.rcount{font-size:0.68rem;color:var(--muted);margin-bottom:0.8rem;padding-left:0.1rem;}
+.rcount span{color:var(--gold2);font-weight:500;}
+.fang-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:1.3rem;overflow:hidden;scroll-margin-top:1.2rem;transition:border-color 0.2s;}
+.fang-card:hover{border-color:var(--border2);}
+.fc-hd{padding:0.7rem 1.1rem;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid var(--border);background:linear-gradient(90deg,rgba(201,168,76,0.05),transparent);}
+.fc-num{font-size:0.62rem;color:var(--muted);background:var(--surface2);padding:0.1rem 0.35rem;border-radius:3px;font-weight:500;letter-spacing:0.04em;}
+.fc-name{font-family:'Noto Serif TC',serif;font-size:1.05rem;font-weight:700;color:var(--text);}
+.edot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.edot-e1{background:#c9a84c;}.edot-e2{background:#4a8a5a;}
+.fc-row{padding:0.5rem 1.1rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;align-items:baseline;}
+.rl{font-size:0.57rem;color:var(--muted);letter-spacing:0.1em;white-space:nowrap;min-width:46px;padding-top:0.08rem;flex-shrink:0;}
+.rv{font-size:0.75rem;color:var(--muted2);line-height:1.65;flex:1;}
+.rv-mnem{color:var(--blue2);}
+.rv-ptn{color:var(--text);}
+.rv-ftr{color:var(--teal2);}
+.tsec{padding:0.5rem 1.1rem;border-top:1px solid var(--border);}
+.tsec>.rl{display:block;margin-bottom:0.35rem;}
+.tw{overflow-x:auto;}
+.tbl{width:100%;border-collapse:collapse;font-size:0.71rem;}
+.tbl th{background:var(--surface2);color:var(--muted2);padding:0.33rem 0.55rem;text-align:left;font-weight:500;letter-spacing:0.04em;border-bottom:1px solid var(--border);font-size:0.62rem;}
+.tbl td{padding:0.34rem 0.55rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;color:var(--muted2);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(255,255,255,0.015);}
+.rb{display:inline-block;padding:0.06rem 0.33rem;border-radius:3px;font-size:0.62rem;font-weight:500;white-space:nowrap;border:1px solid;}
+[data-r="君"]{color:var(--red2);background:rgba(196,92,58,0.16);border-color:rgba(196,92,58,0.28);}
+[data-r="臣"]{color:var(--gold2);background:rgba(201,168,76,0.13);border-color:rgba(201,168,76,0.25);}
+[data-r="佐"]{color:var(--blue2);background:rgba(74,127,168,0.13);border-color:rgba(74,127,168,0.25);}
+[data-r="佐使"]{color:var(--teal2);background:rgba(58,138,136,0.13);border-color:rgba(58,138,136,0.25);}
+[data-r="使"]{color:var(--green2);background:rgba(74,138,90,0.13);border-color:rgba(74,138,90,0.25);}
+[data-r="引"]{color:var(--purple2);background:rgba(122,92,168,0.13);border-color:rgba(122,92,168,0.25);}
+.an-sec{padding:0.5rem 1.1rem;border-top:1px solid var(--border);}
+.an-p{font-size:0.75rem;color:var(--muted2);line-height:1.9;margin-top:0.3rem;}
+.cmp-n{color:var(--gold2)!important;font-weight:500;}
+@media(max-width:720px){.sidebar{display:none;}.content{padding:1rem 0.9rem 2rem;}.fc-name{font-size:0.95rem;}}
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="h-back">← 中醫國考複習站</a>
+  <h1>方義分析　1–20</h1>
+  <div class="h-sub">藥物拆解 · 方義分析 · 類方比較　第一考範圍（1–40方）</div>
+  <div class="h-nav">
+    <span class="hn hn-cur">🟡 1–20　當前</span>
+    <a class="hn hn-e1" href="fangyi-21-40.html">🟡 21–40 →</a>
+    <a class="hn hn-e2" href="fangyi-41-60.html">🟢 41–60 →</a>
+    <a class="hn hn-dim" href="compare.html">↗ 對照卡片</a>
+    <a class="hn hn-dim" href="120fang.html">↗ 閃卡練習</a>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <div class="sb-hd">方 1–20　第一考</div>
+  <div class="sb-search"><input type="text" id="sb-q" placeholder="快速定位…" oninput="sbFilter()"></div>
+  <div id="sb-list"></div>
+</aside>
+<main class="content">
+  <div class="search-bar">
+    <span class="search-label">搜尋</span>
+    <input type="text" id="main-q" placeholder="方名、藥材、功效、口訣…" oninput="render()">
+  </div>
+  <div class="rcount" id="rcount"></div>
+  <div id="cards"></div>
+</main>
+</div>
+<script>
+const START=1, EX='e1', EDOT='edot-e1';
+const NAMES=['乙字湯','一貫煎','二陳湯','九味羌活湯','八正散','十全大補湯','人參養榮湯','八味帶下方','七寶美髯丹','三黃瀉心湯','小柴胡湯','小青龍湯','小承氣湯','大柴胡湯','大青龍湯','大承氣湯','川芎茶調散','小建中湯','小活絡丹','五苓散'];
+const F=[
+{n:'乙字湯',c:'當歸、柴胡、黃芩、大黃、甘草、升麻',
+ m:'乙字當歸柴胡芩，大黃甘草升麻引，清熱涼血兼升提，痔瘡便血此方尋。',
+ h:[['君','大黃','瀉熱通便，導濕熱下行'],['臣','黃芩','清熱燥濕，涼血止血'],['佐','當歸','養血活血，潤腸'],['佐','柴胡','疏肝理氣，升舉清陽'],['佐','升麻','升提中氣，與大黃形成升降相因'],['使','甘草','調和諸藥']],
+ a:'本方為日本漢方治療痔疾的常用方。大黃瀉熱通便，使濕熱從下而去；黃芩清熱燥濕以涼血；當歸養血活血潤腸，防大黃瀉下太過而傷血。柴胡與升麻配伍為點睛之筆——升提下陷之清陽，與大黃的瀉下形成「升降相因」，使清升濁降，肛門局部氣血運行恢復正常。',
+ p:'腸風下血、痔瘡腫痛、大便秘結而屬濕熱者',
+ f:'升降相因（升麻升提＋大黃瀉下）、清補兼施',
+ k:[['槐花散','涼血止血治痔','以槐花、側柏葉涼血為主，無升降配伍','槐花散偏涼血止血，乙字湯兼通便升提'],['秦艽白朮丸','治痔兼顧脾虛','側重健脾祛風','乙字湯偏實熱，秦艽白朮丸偏虛中挾濕']]},
+
+{n:'一貫煎',c:'沙參、麥冬、當歸、生地、枸杞、川楝子',
+ m:'一貫煎中生地黃，沙參麥冬歸杞藏，滋陰疏肝善通絡，肝腎陰虛脅痛嘗。',
+ h:[['君','生地','滋陰養血，壯水涵木'],['臣','枸杞','滋補肝腎之陰'],['臣','當歸','養血和肝'],['佐','沙參、麥冬','養肺胃之陰，金水相生以涵木'],['佐使','川楝子','疏肝理氣止痛，一味疏洩防滋膩礙氣']],
+ a:'本方為肝腎陰虛、肝氣不舒而設。陰虛則肝失柔養、氣機不暢，出現胸脅脘腹疼痛、吞酸吐苦。以大隊滋陰養血之品（生地、枸杞、當歸、沙參、麥冬）滋水涵木，使肝體得養則肝用自和。妙在僅用川楝子一味苦寒之品疏肝泄熱，不用辛香燥散之品（如柴胡、香附），避免辛燥更傷陰血。體現「柔肝」而非「疏肝」的治法特色。',
+ p:'肝腎陰虛、肝氣不舒——胸脅脘腹疼痛、吞酸吐苦、咽乾口燥、舌紅少津脈虛弦',
+ f:'滋陰為主、理氣為輔，柔肝不傷陰',
+ k:[['逍遙散','治肝鬱脅痛','用柴胡、薄荷辛散疏肝，配白朮健脾','逍遙散治肝鬱脾虛（氣滯為主），一貫煎治肝腎陰虛（陰虛為本）'],['滋水清肝飲','滋陰疏肝','＝六味地黃丸＋丹梔逍遙散合方','滋水清肝飲藥味多兼清肝火，一貫煎純以柔潤取勝'],['柴胡疏肝湯','治脅痛','用辛香理氣','實證氣滯用柴胡疏肝，陰虛氣滯用一貫煎']]},
+
+{n:'二陳湯',c:'半夏、陳皮、茯苓、甘草',
+ m:'二陳湯用半夏陳，益以茯苓甘草臣，利氣調中兼燥濕，一切痰飲此為珍。',
+ h:[['君','半夏','燥濕化痰，降逆和胃'],['臣','陳皮','理氣燥濕，使氣順則痰消'],['佐','茯苓','健脾滲濕，治痰之本'],['使','甘草','和中調藥']],
+ a:'治痰通用基礎方。「二陳」指半夏與陳皮均以陳久者良。半夏燥濕化痰為君，陳皮理氣助化痰為臣——氣順則痰消，氣滯則痰聚。茯苓健脾滲濕，斷生痰之源（「脾為生痰之源」）。四藥合用，燥濕化痰、理氣和中，為一切痰濕證的基礎方，後世眾多祛痰方皆由此加減而出。',
+ p:'濕痰咳嗽——痰多色白易咯、胸脘痞悶、噁心嘔吐、肢體困倦、舌苔白膩',
+ f:'標本兼治（化痰＋健脾）、氣痰同調',
+ k:[['溫膽湯','二陳湯為基礎','加竹茹、枳實','溫膽湯治膽胃不和、痰熱內擾的虛煩不眠'],['半夏厚朴湯','半夏＋茯苓化痰','加厚朴、蘇葉行氣散結','治梅核氣（咽中如物阻塞）'],['保和丸','半夏＋茯苓＋陳皮','加山楂、神麴、連翹、萊菔子','保和丸治食積痰阻，二陳湯治一般濕痰'],['六君子湯','二陳湯＋四君子湯','加人參、白朮','脾虛生痰、納差便溏明顯者用六君子']]},
+
+{n:'九味羌活湯',c:'羌活、防風、蒼朮、細辛、川芎、白芷、生地、黃芩、甘草（＋生薑、蔥白）',
+ m:'九味羌活用防風，細辛蒼芷與川芎，黃芩生地同甘草，發汗祛濕力量雄。',
+ h:[['君','羌活','散表寒、祛風濕，善治太陽頭痛項強'],['臣','防風','祛風解表，為風藥中之潤劑'],['臣','蒼朮','發汗祛濕，助羌活勝濕'],['佐','細辛','散少陰之寒'],['佐','白芷','散陽明之邪'],['佐','川芎','行血中之氣，治少陽、厥陰頭痛'],['佐','生地、黃芩','清裡熱，防辛溫太過傷陰'],['使','甘草','調和諸藥']],
+ a:'「分經論治」的代表方。六經各有引經藥：羌活→太陽，白芷→陽明，川芎→少陽／厥陰，細辛→少陰，防風→太陰，蒼朮→濕邪通治。風寒夾濕侵犯多經，故以多味辛溫解表藥分而治之。妙在用生地、黃芩為佐，防群藥辛溫燥烈傷津化熱——寓清於散，體現「發表不遠熱」之意。',
+ p:'外感風寒濕邪——惡寒發熱、肌表無汗、頭痛項強、肢體痠痛、口苦微渴',
+ f:'分經論治、寓清於散',
+ k:[['羌活勝濕湯','羌活祛風勝濕','無清熱藥，專治風濕在表','九味偏外感風寒濕（有發熱），勝濕湯偏風濕痹痛'],['荊防敗毒散','辛溫解表祛濕','加柴胡、枳殼、桔梗、獨活','荊防偏瘡瘍初起，九味偏風寒濕三邪俱盛'],['麻黃湯','辛溫解表','發汗力猛，四味精簡','麻黃湯治純風寒無濕，九味治風寒夾濕']]},
+
+{n:'八正散',c:'木通、瞿麥、萹蓄、車前子、滑石、燈芯草、甘草梢、梔子、大黃',
+ m:'八正木通與車前，萹蓄大黃滑石研，草梢瞿麥兼梔子，煎加燈草濕熱蠲。',
+ h:[['君','瞿麥、萹蓄','清熱利水通淋'],['臣','木通、車前子、滑石','利水通淋，增強清利之力'],['佐','梔子','清三焦之熱，導熱從小便出'],['佐','大黃','瀉熱通腑，導濕熱從大便出'],['佐','燈芯草','清心降火利尿'],['使','甘草梢','緩急止痛（甘草梢善達莖中，直至溺管）']],
+ a:'清熱瀉火、利水通淋的代表方。以多味利水通淋藥集中清利下焦濕熱，使邪有出路。梔子清泄三焦之火，大黃通腑泄熱——前後分消，二便皆通。特用「甘草梢」而非甘草，因甘草梢善達莖中，能緩解尿道澀痛。全方集中火力於清利，藥力峻猛，適合濕熱蘊結下焦的實證。',
+ p:'濕熱淋證——尿頻尿急尿痛、溺色渾赤、甚至癃閉不通、口燥咽乾、舌苔黃膩脈滑數',
+ f:'大隊利水通淋藥集中清利、前後分消',
+ k:[['豬苓湯','利水','豬苓湯利水兼養陰（有阿膠），無清熱瀉火藥','豬苓湯治水熱互結兼陰傷，八正散治濕熱蘊結實證'],['清心蓮子飲','治淋','清心蓮子飲養陰益氣為主','清心蓮子飲治氣陰不足之淋（虛淋），八正散治實熱淋'],['龍膽瀉肝湯','清利濕熱','清肝膽實火，兼顧帶下陰癢','龍膽偏肝膽濕熱（脅痛帶下），八正偏膀胱濕熱（淋證）']]},
+
+{n:'十全大補湯',c:'肉桂、黃耆、人參、白朮、茯苓、甘草、當歸、熟地、白芍、川芎（＋生薑、大棗）',
+ m:'十全大補四君合，四物肉桂黃耆搓，氣血雙補陽兼顧，虛勞諸證效無過。',
+ h:[['君','人參、熟地','人參大補元氣，熟地滋補精血'],['臣','黃耆','益氣固表，助人參補氣'],['臣','當歸','養血活血，助熟地補血'],['佐','白朮、茯苓','健脾滲濕，助運化以資氣血生化'],['佐','白芍、川芎','養血和營、行血中之氣'],['佐','肉桂','溫陽補火，鼓舞氣血生長'],['使','甘草、薑、棗','調和諸藥，健脾和胃']],
+ a:'本方實為「四君子湯＋四物湯＋黃耆＋肉桂」的合方，氣血雙補並溫陽。四君子補氣健脾，四物補血調營，再加黃耆增強補氣固表之力，肉桂溫腎陽、引火歸元，鼓舞氣血生長。適用於氣血兩虛兼陽虛的虛勞重證。',
+ p:'氣血兩虛兼陽虛——面色蒼白、倦怠乏力、頭暈目眩、四肢不溫、腰膝痠軟、舌淡脈細弱',
+ f:'四君＋四物＋溫陽，氣血陽三補合一',
+ k:[['人參養榮湯','氣血雙補','養榮湯去川芎，加五味子、遠志、陳皮','養榮湯兼安神（心悸健忘），十全偏純補氣血'],['八珍湯','四君＋四物','無黃耆、肉桂','八珍治氣血兩虛（無陽虛），十全兼顧陽虛'],['歸脾湯','補氣養血','加龍眼肉、酸棗仁、遠志安神','歸脾側重心脾兩虛（健忘失眠），十全偏全身虛勞']]},
+
+{n:'人參養榮湯',c:'人參、白朮、茯苓、甘草、當歸、白芍、熟地、黃耆、桂心、五味子、陳皮、遠志（＋薑、棗）',
+ m:'人參養榮即十全，除卻川芎五味聯，陳皮遠志加薑棗，養心安神力更全。',
+ h:[['君','人參','大補元氣'],['臣','黃耆','益氣固表'],['臣','熟地、當歸','滋陰養血'],['佐','白朮、茯苓','健脾助運'],['佐','白芍','養血斂陰'],['佐','五味子','斂肺止咳，收斂心氣'],['佐','遠志','交通心腎，安神益智'],['佐','陳皮','理氣和胃，防滋膩礙胃'],['佐','桂心','溫陽通脈'],['使','甘草、薑、棗','調和諸藥']],
+ a:'本方可理解為「十全大補湯去川芎，加五味子、遠志、陳皮」。去川芎是因川芎辛散走竄，不利於虛證之收斂；加五味子收斂耗散之氣，遠志安神定志，陳皮理氣和胃防滋膩。整體在氣血雙補的基礎上，增加了養心安神的功效，適合虛勞病程較久、心神不寧者。',
+ p:'氣血兩虛、營衛不和——倦怠無力、心悸健忘、驚悸不寧、夜寐不安、食少體瘦',
+ f:'十全大補基礎＋斂氣安神',
+ k:[['十全大補湯','氣血雙補＋溫陽','十全有川芎活血，無安神藥','十全偏氣血虛勞本身，養榮兼治心神不寧'],['歸脾湯','補益心脾、安神','有龍眼肉、酸棗仁、木香','歸脾偏心脾血虛（健忘失眠出血），養榮偏全身虛損兼心悸'],['天王補心丹','養心安神','偏滋陰養心，無大補氣血藥','天王治心陰不足（虛煩少寐），養榮治氣血俱虛']]},
+
+{n:'八味帶下方',c:'土茯苓、當歸、川芎、木通、茯苓、陳皮、金銀花、大黃',
+ m:'八味帶下土茯苓，歸芎木通茯苓行，陳皮銀花同大黃，濕熱帶下此方靈。',
+ h:[['君','土茯苓','解毒除濕，善治濕熱帶下'],['臣','金銀花','清熱解毒'],['臣','大黃','瀉熱通腑，導濕熱下行'],['佐','當歸、川芎','養血活血，行血中之滯'],['佐','木通','利水通淋，清濕熱'],['佐','茯苓','健脾滲濕'],['佐','陳皮','理氣燥濕']],
+ a:'本方為治療濕熱帶下的實用方。土茯苓解毒除濕為主藥，配金銀花增強清熱解毒之力，大黃瀉下通腑使濕熱從大便而去。當歸、川芎養血活血，防清利太過而傷血，且「治帶不忘調血」。木通、茯苓利水滲濕，陳皮理氣助化濕。全方清熱解毒、利濕止帶，攻中兼顧養血。',
+ p:'濕熱帶下——帶下量多色黃質稠、有臭氣、陰癢',
+ f:'清熱解毒利濕為主、活血調經為佐',
+ k:[['完帶湯','治帶下','完帶湯健脾為主，補多於瀉','完帶湯治脾虛濕盛帶下（色白量多），八味治濕熱帶下（色黃臭穢）'],['龍膽瀉肝湯','清利濕熱','清肝膽實火','龍膽偏肝經濕熱，八味帶下方專攻帶下局部']]},
+
+{n:'七寶美髯丹',c:'何首烏、白茯苓、牛膝、當歸、枸杞、菟絲子、破故紙（補骨脂）',
+ m:'七寶美髯首烏君，茯苓牛膝歸杞陳，菟絲故紙同為佐，腎虛鬚白變烏新。',
+ h:[['君','何首烏','補肝腎、益精血、烏鬚髮'],['臣','枸杞','滋補肝腎'],['臣','菟絲子','補腎益精'],['佐','當歸','養血活血'],['佐','牛膝','補肝腎、強筋骨、引藥下行'],['佐','破故紙','補腎壯陽，溫補命門'],['佐','白茯苓','健脾寧心，助運化以資化源']],
+ a:'補肝腎、益精血、烏鬚髮的代表方。何首烏為君，善補肝腎精血以烏鬚髮。枸杞、菟絲子滋腎益精，當歸養血潤燥，三藥助首烏補益精血。破故紙溫補腎陽，與眾多滋陰藥相配，體現陰中求陽之意。牛膝補肝腎、引藥下行入腎，茯苓健脾助運防滋膩。',
+ p:'肝腎不足、精血虧虛——鬚髮早白、脫髮、腰膝痠軟、齒牙動搖',
+ f:'陰陽雙補、以補陰為主兼溫陽',
+ k:[['六味地黃丸','補肝腎','六味以三補三瀉為結構，偏腎陰','六味治腎陰虛諸證，七寶專攻精血虧虛之髮白'],['左歸丸','補腎填精','左歸丸純補無瀉，有鹿角膠、龜板','左歸偏填精補髓，七寶偏烏髮益血'],['還少丹','補腎填精','品味繁多、兼溫脾腎','還少丹治老年脾腎虛損，七寶專治鬚白髮落']]},
+
+{n:'三黃瀉心湯',c:'大黃、黃芩、黃連',
+ m:'三黃瀉心大黃連，黃芩同用瀉火先，三焦實火一齊瀉，吐衄瘡瘍血熱煎。',
+ h:[['君','大黃','瀉火通腑，涼血止血'],['臣','黃連','瀉心胃之火'],['佐','黃芩','清肺與上焦之火']],
+ a:'三焦實火的峻瀉方。大黃瀉下焦之火兼通腑，黃連清中焦心胃之火，黃芩清上焦肺火——三藥合用，三焦之火一併蕩滌。方極精簡卻面面俱到，為苦寒直折法的代表。臨床多用於火熱迫血妄行之吐血、衄血、目赤等。',
+ p:'三焦實火——吐血衄血、目赤口瘡、心煩口渴、大便秘結、舌紅苔黃脈數實',
+ f:'三焦分清、苦寒直折',
+ k:[['黃連解毒湯','苦寒清熱瀉火','加黃柏、梔子，去大黃','解毒湯清三焦火毒而不瀉下，三黃兼通腑瀉下'],['涼膈散','瀉火通便','加連翹、薄荷、竹葉、芒硝','涼膈散治上中二焦火盛，三黃治三焦實火'],['大承氣湯','大黃通腑瀉下','偏陽明腑實','大承氣治「痞滿燥實」，三黃治火熱迫血']]},
+
+{n:'小柴胡湯',c:'柴胡、半夏、人參、甘草、黃芩、生薑、大棗',
+ m:'小柴胡湯和解功，半夏人參甘草從，更加黃芩與薑棗，少陽百病此方宗。',
+ h:[['君','柴胡','疏散少陽之邪，透表解熱'],['臣','黃芩','清少陽之熱，與柴胡一散一清'],['佐','半夏、生薑','和胃降逆止嘔'],['佐','人參、大棗','益氣扶正，防邪內傳'],['使','甘草','調和諸藥，助參棗益氣']],
+ a:'和解少陽的代表方。少陽位居半表半裡，邪犯少陽則樞機不利。柴胡與黃芩構成核心配伍——柴胡透邪外出屬「散」，黃芩清內蘊之熱屬「清」，一散一清即為「和解」之義。半夏配生薑和胃降逆，針對少陽犯胃之嘔；人參、大棗、甘草扶正固裡，防邪內傳三陰。全方散清並用、攻補兼施、寒溫並調。',
+ p:'少陽病——寒熱往來、胸脅苦滿、默默不欲飲食、心煩喜嘔、口苦咽乾目眩',
+ f:'散清並用、攻補兼施、寒溫並調',
+ k:[['大柴胡湯','柴胡＋黃芩和解少陽','去人參甘草，加大黃、枳實、白芍','少陽＋陽明裡實：寒熱往來＋便秘腹滿'],['柴胡加龍牡湯','柴胡＋黃芩＋半夏','加龍骨、牡蠣、桂枝、大黃','少陽病兼驚悸不安、煩躁譫語'],['四逆散','柴胡疏肝','無黃芩，改用枳實、白芍','四逆散治陽鬱四逆（肝脾氣鬱），非半表半裡']]},
+
+{n:'小青龍湯',c:'麻黃、桂枝、白芍、甘草、乾薑、半夏、五味子、細辛',
+ m:'小青龍湯治水氣，喘咳嘔噦渴利慰，薑桂麻黃芍藥甘，細辛半夏兼五味。',
+ h:[['君','麻黃','發汗解表，宣肺平喘'],['君','桂枝','解肌發表，溫陽化氣'],['臣','乾薑、細辛','溫肺化飲，散寒蠲飲'],['佐','半夏','燥濕化痰，和胃降逆'],['佐','白芍','斂陰和營，防麻桂發散太過'],['佐','五味子','斂肺止咳，與細辛一散一收'],['使','甘草','調和諸藥']],
+ a:'外散風寒、內化水飲的經典方。麻黃、桂枝解表散寒；乾薑、細辛溫肺化飲，從內消散寒飲。本方最精妙的配伍是「散收相配」：細辛辛散與五味子酸收相反相成，既散寒飲又防耗散肺氣；麻黃發散與白芍斂陰同理。半夏燥濕化痰降逆。全方表裡同治、散收並用。',
+ p:'外寒內飲——惡寒發熱無汗、咳喘痰多清稀、甚則喘不得臥、或身體疼痛、舌苔白滑脈浮',
+ f:'表裡同治、散收並用',
+ k:[['大青龍湯','麻黃＋桂枝解表','大青龍加石膏清裡熱，去內化飲藥','大青龍治外寒內熱（煩躁），小青龍治外寒內飲（痰白清稀）'],['射干麻黃湯','溫肺化飲止咳','加射干利咽，去桂枝白芍','偏痰鳴喉中水雞聲，小青龍偏表證兼水飲'],['苓甘五味薑辛湯','溫肺化飲','無解表藥','已無表證時用，為小青龍去表藥後的裡飲方']]},
+
+{n:'小承氣湯',c:'生大黃、厚朴、枳實',
+ m:'小承氣湯朴枳黃，輕下微和膽略嘗，痞滿便閉無燥實，去硝輕下保安康。',
+ h:[['君','大黃','瀉熱通便，蕩滌腸胃'],['臣','厚朴','行氣消滿'],['佐','枳實','破氣消痞']],
+ a:'輕下之方。大承氣湯去芒硝、減厚朴枳實用量即為本方。去芒硝則無鹹寒軟堅之力，瀉下力較大承氣為輕。適用於陽明腑實有「痞滿」而無「燥堅」者——即腸中有熱結但糞質未至燥硬程度。全方以行氣導滯為主，瀉下為輔。',
+ p:'陽明腑實輕證——潮熱譫語、大便秘結但未至燥堅、腹脹滿、舌苔黃',
+ f:'行氣為主、瀉下為輔',
+ k:[['大承氣湯','大黃＋厚朴＋枳實','加芒硝，厚朴枳實量大','大承氣治「痞滿燥實」俱全的重證'],['調胃承氣湯','大黃瀉下','有芒硝，無厚朴枳實','調胃承氣治燥熱在胃但無痞滿'],['麻子仁丸','瀉下通便','加麻子仁、白芍、杏仁潤腸','麻子仁丸治脾約便秘（津虧腸燥），小承氣治熱結便秘']]},
+
+{n:'大柴胡湯',c:'柴胡、半夏、大黃、黃芩、白芍、枳實、生薑、大棗',
+ m:'大柴胡湯用大黃，枳實芍藥與黃芩，半夏薑棗兼柴胡，少陽陽明雙解清。',
+ h:[['君','柴胡','和解少陽，透邪外出'],['臣','黃芩','清少陽之熱'],['臣','大黃','瀉陽明腑實之熱'],['佐','枳實','行氣消痞，助大黃通下'],['佐','白芍','緩急止痛，柔肝斂陰'],['佐','半夏、生薑','和胃降逆止嘔'],['使','大棗','和中護胃']],
+ a:'可理解為「小柴胡湯去人參甘草＋小承氣湯去厚朴」。去人參甘草是因裡有實邪，不宜補益；加大黃、枳實瀉陽明腑實。柴胡、黃芩和解少陽，大黃、枳實瀉下陽明——雙管齊下治少陽陽明合病。白芍既能緩急止痛，又能防攻下傷陰。',
+ p:'少陽陽明合病——往來寒熱、胸脅苦滿、嘔不止、鬱鬱微煩、心下滿痛或便秘、舌苔黃脈弦數有力',
+ f:'和解＋通下並用',
+ k:[['小柴胡湯','柴胡＋黃芩','小柴胡有人參甘草扶正，無瀉下藥','小柴胡治純少陽病，大柴胡治少陽＋陽明裡實'],['大承氣湯','大黃通腑瀉實','無和解少陽藥','大承氣治純陽明腑實，大柴胡兼有少陽證'],['柴胡加龍牡湯','小柴胡加減','加鎮安藥','龍牡湯治少陽兼心神不安，大柴胡治少陽兼腑實']]},
+
+{n:'大青龍湯',c:'麻黃、桂枝、炙甘草、杏仁、石膏、生薑、大棗',
+ m:'大青龍湯桂麻黃，杏草石膏薑棗藏，外束風寒內蘊熱，發汗清熱是良方。',
+ h:[['君','麻黃','發汗解表，開腠理散寒邪'],['臣','桂枝','助麻黃解表，溫通經脈'],['臣','石膏','清裡熱除煩，制麻桂之溫'],['佐','杏仁','利肺氣，助麻黃平喘'],['佐','生薑、大棗','調和營衛'],['使','炙甘草','調和諸藥，緩麻黃峻烈之性']],
+ a:'發汗解表、清熱除煩的峻劑。本方可理解為「麻黃湯＋石膏」。外有風寒束表（惡寒發熱無汗身痛），內有鬱熱（煩躁），需表裡雙解。麻黃、桂枝大力發汗散寒，石膏清裡熱除煩——解表力和清裡力均強。發汗力極峻，「一服汗者停後服」，不可過汗。',
+ p:'外感風寒兼裡熱——惡寒發熱、身疼痛、不汗出而煩躁、脈浮緊',
+ f:'辛溫發汗＋辛寒清熱、表裡雙解',
+ k:[['麻黃湯','麻＋桂＋杏＋甘','麻黃湯無石膏','麻黃湯治風寒表實無裡熱，大青龍治外寒內熱煩躁'],['小青龍湯','麻黃＋桂枝解表','小青龍內化水飲','小青龍治外寒內飲（痰清稀），大青龍治外寒內熱（煩躁）'],['麻杏甘石湯','麻黃＋石膏','無桂枝，偏清宣肺熱','麻杏甘石治邪熱壅肺（汗出而喘），大青龍治表寒裡熱（無汗煩躁）']]},
+
+{n:'大承氣湯',c:'大黃、厚朴、枳實、芒硝',
+ m:'大承氣湯用硝黃，配以枳朴瀉力強，痞滿燥實四證備，峻下熱結此方良。',
+ h:[['君','大黃','瀉下攻積，蕩滌腸胃實熱'],['臣','芒硝','鹹寒軟堅潤燥，助大黃攻下燥屎'],['佐','厚朴','行氣消滿，助大黃推蕩積滯'],['佐','枳實','破氣消痞']],
+ a:'峻下的代表方，六腑以通為用的體現。陽明腑實「痞滿燥實」四證俱全時方可使用。大黃瀉熱攻積，芒硝軟堅潤燥以碎燥屎，厚朴行氣消滿，枳實破氣消痞——四藥合力，瀉下與行氣並進，使實熱燥屎一掃而出。「釜底抽薪」「急下存陰」皆此方之用。',
+ p:'陽明腑實重證——痞（心下滿）、滿（腹脹滿）、燥（糞質燥結）、實（按之硬痛拒按）；潮熱譫語、手足濈然汗出、舌苔焦黃或焦黑起刺、脈沉實有力',
+ f:'瀉下與行氣並重、泄熱與軟堅合用',
+ k:[['小承氣湯','大黃＋厚朴＋枳實','無芒硝，量輕','小承氣治痞滿無燥實的輕證'],['調胃承氣湯','大黃＋芒硝','無厚朴枳實','調胃承氣治燥熱在胃無痞滿'],['涼膈散','大黃＋芒硝瀉下','加連翹、薄荷等清上焦','涼膈散兼清膈上之熱，大承氣專攻腸腑實結']]},
+
+{n:'川芎茶調散',c:'川芎、白芷、甘草、羌活、荊芥、細辛、防風、薄荷、細茶',
+ m:'川芎茶調散荊防，辛芷薄荷甘草藏，目昏鼻塞風攻上，偏正頭痛悉能康。',
+ h:[['君','川芎','活血行氣、祛風止痛，為治頭痛要藥'],['臣','羌活','散太陽風寒，治後頭痛'],['臣','白芷','散陽明風寒，治前額痛'],['佐','荊芥、防風','祛風解表'],['佐','細辛','散少陰寒邪，通竅止痛'],['佐','薄荷','疏散風熱，清利頭目'],['引','細茶','清利頭目，制辛散太過'],['使','甘草','調和諸藥']],
+ a:'疏風止痛的代表方，專治外感風邪頭痛。川芎上行頭目、活血祛風，為治各類頭痛的要藥。配伍上體現分經用藥：羌活治太陽頭痛（後頭痛）、白芷治陽明頭痛（前額痛）、川芎治少陽頭痛（兩側）、細辛治少陰頭痛（巔頂痛）。荊芥、防風助祛風，薄荷清利頭目。用細茶送服，取茶之苦寒清降，既引藥上行頭目又制群藥辛散太過。',
+ p:'外感風邪頭痛——偏正頭痛或巔頂痛、惡寒發熱、目眩鼻塞',
+ f:'分經論治頭痛、以茶制散',
+ k:[['九味羌活湯','羌活＋防風＋川芎＋白芷','加蒼朮祛濕、加生地黃芩清熱','九味治風寒濕全身證候，川芎茶調散專治頭痛'],['羌活勝濕湯','羌活＋防風祛風','偏祛濕止痛','勝濕湯治風濕身痛（頭重如裹），川芎茶調治風邪頭痛'],['清上防風湯','防風＋川芎治頭面','加黃連、黃芩清熱','清上防風湯治頭面風熱瘡瘍，川芎茶調治頭痛']]},
+
+{n:'小建中湯',c:'桂枝、白芍、甘草、生薑、大棗、飴糖',
+ m:'小建中湯芍藥多，桂枝甘草薑棗和，更加飴糖補中氣，虛勞腹痛效相魔。',
+ h:[['君','飴糖','溫中補虛，緩急止痛'],['臣','白芍（重用）','養營陰，緩急止痛，酸甘化陰'],['佐','桂枝','溫陽氣，辛甘化陽'],['佐','生薑、大棗','調和營衛，助建中氣'],['使','甘草','補中緩急，合飴糖、白芍酸甘化陰']],
+ a:'本方是桂枝湯倍白芍加飴糖而成。桂枝湯本為調和營衛之方，倍用白芍以增強緩急止痛、養營陰之力，加飴糖溫中補虛。辛甘化陽（桂枝＋甘草）與酸甘化陰（白芍＋甘草＋飴糖）並用，陰陽雙調以建立中焦。「建中」之名即建立中氣之意，適用於中焦虛寒、氣血不足的虛勞腹痛。',
+ p:'中焦虛寒——腹中拘急疼痛、喜溫喜按、心中悸動、面色無華、或虛勞發熱、手足煩熱',
+ f:'辛甘化陽＋酸甘化陰、陰陽雙補建中',
+ k:[['桂枝湯','桂枝＋白芍＋甘草＋薑棗','桂枝湯芍藥等量，無飴糖','桂枝湯治表虛感冒，小建中治虛勞腹痛'],['理中湯','溫中補虛','用人參白朮乾薑，純以溫補','理中湯治脾胃虛寒（吐瀉），小建中治中虛急痛（陰陽兩虛）'],['黃耆建中湯','小建中湯基礎','加黃耆益氣固表','黃耆建中治虛勞兼表虛自汗']]},
+
+{n:'小活絡丹',c:'川烏、草烏、天南星、地龍、乳香、沒藥',
+ m:'小活絡丹治風痹，二烏南星乳沒施，地龍活絡能通痹，風寒濕痹此方醫。',
+ h:[['君','川烏、草烏','祛風散寒、除濕止痛，力猛善治沉痼痹痛'],['臣','天南星','祛風化痰，治痰阻經絡'],['佐','乳香','活血行氣止痛'],['佐','沒藥','散瘀消腫止痛'],['佐','地龍','通經活絡，性走竄善入絡']],
+ a:'祛風散寒、化痰除濕、活血通絡的峻猛之方，專治風寒濕痹日久入絡。川烏、草烏辛熱有毒，善散沉寒痼冷，止痹痛力強。天南星祛風化痰——「久病入絡多痰瘀」，痹證日久痰瘀互結，故需化痰。乳香、沒藥活血化瘀止痛，地龍通經活絡引藥入絡。全方辛熱有毒，力量峻猛，須注意用量。',
+ p:'風寒濕痹日久——肢體筋脈疼痛、麻木拘攣、關節屈伸不利、疼痛遊走或固定、舌淡苔白',
+ f:'祛風散寒＋化痰通絡＋活血止痛',
+ k:[['獨活寄生湯','治痹','補肝腎扶正為主','獨活寄生治痹證日久肝腎不足，小活絡丹治痰瘀阻絡實證'],['蠲痺湯','祛風止痹','兼益氣養血','蠲痺湯治氣血不足之痹，小活絡丹治寒濕痰瘀之痹'],['烏頭湯','烏頭祛寒止痛','配黃耆益氣、芍藥緩急','烏頭湯偏寒痹劇痛兼氣虛，小活絡丹偏痰瘀入絡']]},
+
+{n:'五苓散',c:'桂枝、茯苓、豬苓、白朮、澤瀉',
+ m:'五苓散治太陽腑，白朮澤瀉豬茯苓，桂枝化氣兼解表，小便不利此方通。',
+ h:[['君','澤瀉','利水滲濕，直達腎與膀胱'],['臣','茯苓','利水滲濕，兼健脾'],['臣','豬苓','利水滲濕，力專於利水'],['佐','白朮','健脾燥濕，助脾運化水濕'],['使','桂枝','溫陽化氣，助膀胱氣化以行水；兼解表']],
+ a:'利水滲濕的基礎代表方，體現「通陽利水」之法。澤瀉、茯苓、豬苓三味利水滲濕，從不同層面排除水濕。白朮健脾，治水之本（「諸濕腫滿，皆屬於脾」）。桂枝為全方點睛——溫陽化氣以助膀胱氣化，「氣化則水行」。正因有桂枝溫通，使利水不是單純的滲利，而是恢復膀胱氣化功能，標本兼治。',
+ p:'膀胱蓄水證——小便不利、頭痛微熱、煩渴欲飲水反吐（水逆）；或水濕內停之水腫、泄瀉',
+ f:'利水＋健脾＋溫陽化氣，標本兼治',
+ k:[['豬苓湯','豬苓＋茯苓＋澤瀉利水','加阿膠滋陰、滑石清熱，無桂枝白朮','豬苓湯治水熱互結兼陰傷（心煩不寐），五苓散治膀胱氣化不利'],['苓桂朮甘湯','茯苓＋桂枝＋白朮','無澤瀉豬苓，利水力弱','苓桂朮甘治痰飲（目眩心悸），五苓散治蓄水小便不利'],['真武湯','利水＋溫陽','用附子溫腎陽，加白芍','真武湯治脾腎陽虛水泛（四肢沉重），五苓散偏膀胱氣化不利']]},
+];
+
+function rb(r){return`<span class="rb" data-r="${r}">${r}</span>`;}
+function herbRows(h){return h.map(r=>`<tr><td>${rb(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');}
+function cmpRows(k){return k.map(r=>`<tr><td class="cmp-n">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');}
+
+function render(){
+  const q=document.getElementById('main-q').value.toLowerCase();
+  const filtered=F.filter((f,i)=>{
+    if(!q)return true;
+    const idx=START+i;
+    return f.n.includes(q)||f.c.includes(q)||f.m.includes(q)||f.a.includes(q)||f.p.includes(q)||f.f.includes(q)||String(idx)===q.trim();
+  });
+  document.getElementById('rcount').innerHTML=q?`顯示 <span>${filtered.length}</span> / ${F.length} 首`:`共 <span>${F.length}</span> 首`;
+  document.getElementById('cards').innerHTML=filtered.map(f=>{
+    const i=F.indexOf(f);
+    const num=START+i;
+    return`<section id="f${num}" class="fang-card">
+  <div class="fc-hd">
+    <span class="fc-num">#${String(num).padStart(3,'0')}</span>
+    <span class="fc-name">${f.n}</span>
+    <span class="edot ${EDOT}"></span>
+  </div>
+  <div class="fc-row"><span class="rl">組成</span><span class="rv">${f.c}</span></div>
+  <div class="fc-row"><span class="rl">口訣</span><span class="rv rv-mnem">${f.m}</span></div>
+  <div class="tsec">
+    <span class="rl">藥物拆解</span>
+    <div class="tw"><table class="tbl">
+      <thead><tr><th>角色</th><th>藥材</th><th>功效定位</th></tr></thead>
+      <tbody>${herbRows(f.h)}</tbody>
+    </table></div>
+  </div>
+  <div class="an-sec">
+    <span class="rl">方義分析</span>
+    <p class="an-p">${f.a}</p>
+  </div>
+  <div class="fc-row"><span class="rl">主治</span><span class="rv rv-ptn">${f.p}</span></div>
+  <div class="fc-row"><span class="rl">配伍特點</span><span class="rv rv-ftr">${f.f}</span></div>
+  <div class="tsec">
+    <span class="rl">類方比較</span>
+    <div class="tw"><table class="tbl">
+      <thead><tr><th>比較方</th><th>共同點</th><th>關鍵差異</th><th>鑑別要點</th></tr></thead>
+      <tbody>${cmpRows(f.k)}</tbody>
+    </table></div>
+  </div>
+</section>`;
+  }).join('');
+  initObs();
+}
+
+function buildSidebar(){
+  const sb=document.getElementById('sb-list');
+  sb.innerHTML=NAMES.map((n,i)=>`<a href="#f${START+i}" class="sb-a" id="sb-${START+i}"><span class="sb-n">${START+i}</span>${n}</a>`).join('');
+}
+function sbFilter(){
+  const q=document.getElementById('sb-q').value.toLowerCase();
+  document.querySelectorAll('.sb-a').forEach(a=>{
+    a.classList.toggle('hidden',!!q&&!a.textContent.toLowerCase().includes(q));
+  });
+}
+
+let obs;
+function initObs(){
+  if(obs)obs.disconnect();
+  obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        document.querySelectorAll('.sb-a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+      }
+    });
+  },{threshold:0.15,rootMargin:'-5% 0px -75% 0px'});
+  document.querySelectorAll('.fang-card').forEach(s=>obs.observe(s));
+}
+
+buildSidebar();
+render();
+document.getElementById('main-q').addEventListener('input',render);
+</script>
+</body>
+</html>
